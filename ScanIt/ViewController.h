@@ -12,23 +12,20 @@
 #import <DBCamera/DBCameraContainerViewController.h>
 #import <DBCamera/DBCameraLibraryViewController.h>
 #import "PCAngularActivityIndicatorView.h"
+#import "DetailView.h"
 
-@interface ViewController : UIViewController <AKPickerViewDelegate, AKPickerViewDataSource, DBCameraViewControllerDelegate>{
-        
-    NSUInteger pickedItem;
+@interface ViewController : UIViewController <AKPickerViewDelegate, AKPickerViewDataSource, DBCameraViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource>{
+    
+    PCAngularActivityIndicatorView *ActivityIndicator;
     NSArray *array;
+    UIImage *pickedImage;
 }
 
-@property (strong, nonatomic) IBOutlet AKPickerView *pickerView;
-@property (weak, nonatomic) IBOutlet PCAngularActivityIndicatorView *ActivityIndicator;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *LabelConstraint;
-
+@property (weak, nonatomic) IBOutlet AKPickerView *pickerView;
+@property (weak, nonatomic) IBOutlet UIImageView *background;
 @property (weak, nonatomic) IBOutlet UIImageView *TapImage;
 @property (weak, nonatomic) IBOutlet UILabel *TapLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *background;
-@property (weak, nonatomic) IBOutlet UILabel *ResultLabel;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
