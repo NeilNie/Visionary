@@ -10,6 +10,9 @@
 
 @interface ScanItem : RLMObject
 
+@property NSData *result;
+@property NSData *imageData;
+
 @end
 
 // This protocol enables typed collections. i.e.:

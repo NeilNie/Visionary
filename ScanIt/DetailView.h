@@ -12,6 +12,7 @@
 #import <DBCamera/DBCameraContainerViewController.h>
 #import <DBCamera/DBCameraLibraryViewController.h>
 #import "PCAngularActivityIndicatorView.h"
+#import "ScanItem.h"
 #import "WebPage.h"
 #import "TextView.h"
 

@@ -11,10 +11,12 @@
 #import <DBCamera/DBCameraViewController.h>
 #import <DBCamera/DBCameraContainerViewController.h>
 #import <DBCamera/DBCameraLibraryViewController.h>
+#import <Realm/Realm.h>
+#import "ScanItem.h"
 #import "PCAngularActivityIndicatorView.h"
 #import "DetailView.h"
 
-@interface ViewController : UIViewController <AKPickerViewDelegate, AKPickerViewDataSource, DBCameraViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource>{
+@interface ViewController : UIViewController <AKPickerViewDelegate, AKPickerViewDataSource, DBCameraViewControllerDelegate>{
     
     PCAngularActivityIndicatorView *ActivityIndicator;
     NSArray *array;
@@ -22,10 +24,6 @@
 }
 
 @property (weak, nonatomic) IBOutlet AKPickerView *pickerView;
-@property (weak, nonatomic) IBOutlet UIImageView *background;
-@property (weak, nonatomic) IBOutlet UIImageView *TapImage;
-@property (weak, nonatomic) IBOutlet UILabel *TapLabel;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-
+@property (weak, nonatomic) IBOutlet UILabel *label;
 @end
 

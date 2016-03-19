@@ -10,5 +10,9 @@
 #import <CoreImage/CoreImage.h>
 
 @interface GenerateQR : UIViewController
+@property (weak, nonatomic) IBOutlet UITextField *textfield;
+@property (weak, nonatomic) IBOutlet UIImageView *image;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint;
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
 
 @end

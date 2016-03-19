@@ -16,7 +16,12 @@
 
 - (void)viewDidLoad {
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/#q=%@", self.urlString]];
+    NSURL *url;
+    if ([self.urlString containsString:@"www"]) {
+        url = [NSURL URLWithString:self.urlString];
+    }else{
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/#q=%@", self.urlString]];
+    }
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:request];
     

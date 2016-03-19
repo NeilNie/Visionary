@@ -14,23 +14,12 @@
 
 @implementation ViewController
 
-#pragma mark - UICollectionView
-
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-}
-
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return nil;
-}
-
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    
-    return 5;
-}
-
 #pragma mark - Private
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    [self openCamera];
+}
 
 -(void)openCamera{
 
@@ -44,11 +33,6 @@
 
 -(IBAction)TakePicture:(id)sender{
     [self openCamera];
-}
-
--(void)tap:(UITapGestureRecognizer *)gesture{
-    [self openCamera];
-
 }
 
 #pragma mark - DBCamera Delegate
@@ -78,10 +62,31 @@
     return array[item];
 }
 
-- (void)viewDidLoad {
+-(void)pickerView:(AKPickerView *)pickerView didSelectItem:(NSInteger)item{
     
-    UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
-    [self.background addGestureRecognizer:singleFingerTap];
+    switch (item) {
+        case 0:
+            self.label.text = @"Label detection is the most basic function. It gives you keywords about your image.";
+            break;
+        case 1:
+            self.label.text = @"Face detection detects the number of people and overall emtions in your image.";
+            break;
+        case 2:
+            self.label.text = @"Lankmark detection tells you the name of the landmark. Note: the landmark has to make up to 3/4 of your image";
+            break;
+        case 3:
+            self.label.text = @"Text detection converts all the text in your image and turn them into the digital format";
+            break;
+        case 4:
+            self.label.text = @"Logo detection tells you the name of the logo. Note: the logo has to make up to 3/4 of your image and you can only scan one logo at a time";
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)viewDidLoad {
     
     self.pickerView.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:21];
     self.pickerView.highlightedFont = [UIFont fontWithName:@"HelveticaNeue" size:21];
@@ -100,7 +105,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 #pragma mark - Navigation
 

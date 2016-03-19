@@ -14,19 +14,87 @@
 
 @implementation GenerateQR
 
-- (CIImage *)createQRForString:(NSString *)qrString {
+- (IBAction)delete:(id)sender {
     
-    NSData *stringData = [qrString dataUsingEncoding: NSISOLatin1StringEncoding];
-    
-    CIFilter *qrFilter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
-    [qrFilter setValue:stringData forKey:@"inputMessage"];
-    
-    return qrFilter.outputImage;
+    [UIView animateWithDuration:0.5 animations:^{
+        self.constraint.constant = 0;
+        [self.view layoutIfNeeded];
+    }];
+    self.textfield.text = @"";
 }
+
+- (IBAction)save:(id)sender {
+    
+    UIImageWriteToSavedPhotosAlbum(self.image.image, nil, nil, nil);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"QR code saved"
+                                                    message:nil
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+-(IBAction)generate:(id)sender{
+    
+    self.image.image = [self createQRForString:self.textfield.text];
+    [UIView animateWithDuration:0.5 animations:^{
+        self.constraint.constant = 300;
+        [self.view layoutIfNeeded];
+    }];
+    self.saveButton.enabled = YES;
+}
+
+- (UIImage *)createQRForString:(NSString *)qrString {
+    
+    CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
+    
+    [filter setDefaults];
+    
+    NSData *data = [qrString dataUsingEncoding:NSUTF8StringEncoding];
+    [filter setValue:data forKey:@"inputMessage"];
+    
+    CIImage *outputImage = [filter outputImage];
+    
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CGImageRef cgImage = [context createCGImage:outputImage
+                                       fromRect:[outputImage extent]];
+    
+    UIImage *image = [UIImage imageWithCGImage:cgImage
+                                         scale:1.
+                                   orientation:UIImageOrientationUp];
+    
+    // Resize without interpolating
+    UIImage *resized = [self resizeImage:image
+                             withQuality:kCGInterpolationNone rate:50.0];
+    CGImageRelease(cgImage);
+    
+    return resized;
+    
+}
+
+- (UIImage *)resizeImage:(UIImage *)image
+             withQuality:(CGInterpolationQuality)quality
+                    rate:(CGFloat)rate
+{
+    UIImage *resized = nil;
+    CGFloat width = image.size.width * rate;
+    CGFloat height = image.size.height * rate;
+    
+    UIGraphicsBeginImageContext(CGSizeMake(width, height));
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetInterpolationQuality(context, quality);
+    [image drawInRect:CGRectMake(0, 0, width, height)];
+    resized = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return resized;
+}
+
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    self.saveButton.enabled = NO;
     // Do any additional setup after loading the view.
 }
 

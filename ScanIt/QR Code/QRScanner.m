@@ -29,9 +29,19 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)saveHistory:(id)sender {
+    
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = self.lblStatus.text;
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Great!"
+                                                    message:@"Saved to pasteboard"
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 
 - (IBAction)openWeb:(id)sender {
+    [self performSegueWithIdentifier:@"ShowQRWeb" sender:nil];
 }
 
 - (IBAction)startStopReading:(id)senderg{
@@ -106,6 +116,7 @@
 
 
 -(void)stopReading{
+    
     // Stop video capture and make the capture session object nil.
     [_captureSession stopRunning];
     _captureSession = nil;
@@ -150,7 +161,6 @@
             // stop reading and change the bar button item's title and the flag's value.
             // Everything is done on the main thread.
             [_lblStatus performSelectorOnMainThread:@selector(setText:) withObject:[metadataObj stringValue] waitUntilDone:NO];
-            [self checkingName:[metadataObj stringValue]];
             [self performSelectorOnMainThread:@selector(stopReading) withObject:nil waitUntilDone:NO];
             [_bbitemStart performSelectorOnMainThread:@selector(setTitle:) withObject:@"START" waitUntilDone:NO];
             
@@ -165,25 +175,15 @@
     
     
 }
--(void)checkingName:(NSString *)string{
-    
-    NSLog(@"checking name");
-    if ([string rangeOfString:@"#001107"].location != NSNotFound) {
-        
-        NSScanner *scanner = [NSScanner scannerWithString:string];
-        NSString *result;
-        NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"#001107"];
-        [scanner scanUpToCharactersFromSet:numbers intoString:&result];
-        NSLog(@"%@", result);
-    }
-}
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
-    
+    if ([[segue destinationViewController] isKindOfClass:[WebPage class]]) {
+        WebPage *destination =(WebPage *)segue.destinationViewController;
+        destination.urlString = self.lblStatus.text;
+    }
 }
-
 
 @end

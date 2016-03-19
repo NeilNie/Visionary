@@ -265,9 +265,8 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
             [self.resultArray addObject:emotionPercentString];
         }
 
-    } else {
-
     }
+    [self savetoHistoryWithString:self.resultArray];
 }
 
 -(void)LogoResultWithJson:(NSDictionary *)responseData{
@@ -287,6 +286,7 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     } else {
         [self.resultArray addObject:@"No result found"];
     }
+    [self savetoHistoryWithString:self.resultArray];
 }
 
 -(void)LabelResultWithJson:(NSDictionary *)responseData{
@@ -307,8 +307,7 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     } else {
         [self.resultArray addObject:@"Sorry, no result found"];
     }
-    
-    NSLog(@"%@", self.resultArray);
+    [self savetoHistoryWithString:self.resultArray];
 }
 
 -(void)LandmarkResultWithJson:(NSDictionary *)responseData{
@@ -333,7 +332,7 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     } else {
         [self.resultArray addObject:@"Sorry, no result found"];
     }
-    NSLog(@"%@", TextViewText);
+    [self savetoHistoryWithString:self.resultArray];
 
 }
 -(void)TextResultWithJson:(NSDictionary *)responseData{
@@ -353,13 +352,19 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     } else {
         [self.resultArray addObject:@"Sorry, no result found"];
     }
-    NSLog(@"%@", TextViewText);
+    [self savetoHistoryWithString:[NSMutableArray arrayWithObject:TextViewText]];
 }
 
 -(void)showLabel{
     
+    int constraint;
+    if (_resultArray.count > 5) {
+        constraint = 250;
+    }else{
+        constraint = 180;
+    }
     [UIView animateWithDuration:0.8 animations:^{
-        self.LabelConstraint.constant = 180;
+        self.LabelConstraint.constant = constraint;
         [self.view layoutIfNeeded];
     }];
 }
@@ -391,10 +396,22 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     
 }
 
+-(void)savetoHistoryWithString:(NSMutableArray *)result{
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    ScanItem *item = [[ScanItem alloc] init];
+    item.imageData = UIImagePNGRepresentation(self.imageView.image);
+    item.result = [NSKeyedArchiver archivedDataWithRootObject:result];
+    [realm addObject:item];
+    [realm commitWriteTransaction];
+}
+
 #pragma mark - Life Cycle
 
 - (void)viewDidLoad {
     
+    NSLog(@"%@", [RLMRealm defaultRealm].path);
     self.LabelConstraint.constant = 0;
     self.ResultTable.backgroundColor = [UIColor clearColor];
     self.WebView.enabled = NO;
