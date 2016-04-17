@@ -15,6 +15,9 @@
 #import "ScanItem.h"
 #import "PCAngularActivityIndicatorView.h"
 #import "DetailView.h"
+#import "PreferenceStore.h"
+
+@import GoogleMobileAds;
 
 @interface ViewController : UIViewController <AKPickerViewDelegate, AKPickerViewDataSource, DBCameraViewControllerDelegate>{
     
@@ -23,6 +26,7 @@
     UIImage *pickedImage;
 }
 
+@property (weak, nonatomic) IBOutlet GADBannerView *banner;
 @property (weak, nonatomic) IBOutlet AKPickerView *pickerView;
 @property (weak, nonatomic) IBOutlet UILabel *label;
 @end

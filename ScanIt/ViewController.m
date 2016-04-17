@@ -97,6 +97,16 @@
     self.pickerView.delegate = self;
     self.pickerView.dataSource = self;
     array = [[NSArray alloc] initWithObjects:@"Label", @"Face", @"Landmark", @"Text", @"Logo", nil];
+    
+    areAdsRemoved = [[NSUserDefaults standardUserDefaults] boolForKey:@"areAdsRemoved"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    if (!areAdsRemoved) {
+        self.banner.adUnitID = @"ca-app-pub-7942613644553368/1563136736";
+        self.banner.rootViewController = self;
+        [self.banner loadRequest:[GADRequest request]];
+    }else{
+        self.banner.hidden = YES;
+    }
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }

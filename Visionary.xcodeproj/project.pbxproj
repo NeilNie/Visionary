@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		002BDE761C9CAA97005E7868 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 002BDE751C9CAA97005E7868 /* History.m */; };
 		002BDE781C9CAAD9005E7868 /* history.png in Resources */ = {isa = PBXBuildFile; fileRef = 002BDE771C9CAAD9005E7868 /* history.png */; };
+		004D42471C9DFF46006CD1E4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004D42461C9DFF46006CD1E4 /* StoreKit.framework */; };
 		0051EE281C95B615001AFBB6 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 0051EE271C95B615001AFBB6 /* camera.png */; };
 		0051EE2B1C95BF4D001AFBB6 /* ScanItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0051EE2A1C95BF4D001AFBB6 /* ScanItem.m */; };
 		0051EE2E1C95E432001AFBB6 /* visionary-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0051EE2D1C95E432001AFBB6 /* visionary-icon.png */; };
@@ -71,6 +72,7 @@
 		002BDE741C9CAA97005E7868 /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
 		002BDE751C9CAA97005E7868 /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
 		002BDE771C9CAAD9005E7868 /* history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history.png; sourceTree = "<group>"; };
+		004D42461C9DFF46006CD1E4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0051EE271C95B615001AFBB6 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
 		0051EE291C95BF4D001AFBB6 /* ScanItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanItem.h; sourceTree = "<group>"; };
 		0051EE2A1C95BF4D001AFBB6 /* ScanItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanItem.m; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				004D42471C9DFF46006CD1E4 /* StoreKit.framework in Frameworks */,
 				00F867461C970D7100868A70 /* CoreImage.framework in Frameworks */,
 				E8392441F36E63A853943DF0 /* libPods.a in Frameworks */,
 			);
@@ -293,6 +296,7 @@
 		CEC570C82910FEB966EBFC73 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				004D42461C9DFF46006CD1E4 /* StoreKit.framework */,
 				00F867451C970D7100868A70 /* CoreImage.framework */,
 				56951794329F00F2510ABA66 /* libPods.a */,
 			);
@@ -666,6 +670,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = ScanIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -685,6 +690,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = ScanIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -15,6 +15,9 @@
 #import "ScanItem.h"
 #import "WebPage.h"
 #import "TextView.h"
+#import "PreferenceStore.h"
+
+@import GoogleMobileAds;
 
 @interface DetailView : UIViewController <UITableViewDelegate, UITableViewDataSource>{
     
@@ -35,5 +38,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIButton *OpenFile;
 @property (weak, nonatomic) IBOutlet UIButton *WebView;
+@property (weak, nonatomic) IBOutlet GADBannerView *banner;
 
 @end

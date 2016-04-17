@@ -72,6 +72,15 @@
 
 - (void)viewDidLoad {
     
+    areAdsRemoved = [[NSUserDefaults standardUserDefaults] boolForKey:@"areAdsRemoved"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    if (!areAdsRemoved) {
+        self.banner.adUnitID = @"ca-app-pub-7942613644553368/1563136736";
+        self.banner.rootViewController = self;
+        [self.banner loadRequest:[GADRequest request]];
+    }else{
+        self.banner.hidden = YES;
+    }
     allItems = [ScanItem allObjects];
     [super viewDidLoad];
     // Do any additional setup after loading the view.

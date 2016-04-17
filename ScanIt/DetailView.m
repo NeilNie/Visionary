@@ -42,7 +42,7 @@
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 70)];
     [headerView setBackgroundColor:[UIColor orangeColor]];
     
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, -8, 300, 44)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, -8, 300, 44)];
     label.backgroundColor = [UIColor clearColor];
     label.textColor = [UIColor whiteColor];
     label.font = [UIFont fontWithName:@"Helvetica" size:18];
@@ -337,21 +337,17 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
 }
 -(void)TextResultWithJson:(NSDictionary *)responseData{
     
-    NSDictionary *textAnnotations = [responseData objectForKey:@"textAnnotations"];
-    NSInteger numLabels = [textAnnotations count];
-    
-    if (numLabels > 0) {
+    NSArray *textAnnotations = [responseData objectForKey:@"textAnnotations"];
+    if (textAnnotations > 0) {
         
-        for (NSDictionary *label in textAnnotations) {
-            NSString *labelString = [label objectForKey:@"description"];
-            TextViewText = labelString;
-            self.OpenFile.enabled = YES;
-            [self performSegueWithIdentifier:@"ShowTextView" sender:nil];
-        }
+        TextViewText = [[textAnnotations objectAtIndex:0] objectForKey:@"description"];
+        [self performSegueWithIdentifier:@"ShowTextView" sender:nil];
+        self.OpenFile.enabled = YES;
         
     } else {
         [self.resultArray addObject:@"Sorry, no result found"];
     }
+    
     [self savetoHistoryWithString:[NSMutableArray arrayWithObject:TextViewText]];
 }
 
@@ -428,6 +424,15 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     [self createRequest:binaryImageData];
     self.resultArray = [NSMutableArray array];
     
+    areAdsRemoved = [[NSUserDefaults standardUserDefaults] boolForKey:@"areAdsRemoved"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    if (!areAdsRemoved) {
+        self.banner.adUnitID = @"ca-app-pub-7942613644553368/1563136736";
+        self.banner.rootViewController = self;
+        [self.banner loadRequest:[GADRequest request]];
+    }else{
+        self.banner.hidden = YES;
+    }
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 }
