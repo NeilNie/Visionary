@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		002BDE761C9CAA97005E7868 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 002BDE751C9CAA97005E7868 /* History.m */; };
 		002BDE781C9CAAD9005E7868 /* history.png in Resources */ = {isa = PBXBuildFile; fileRef = 002BDE771C9CAAD9005E7868 /* history.png */; };
-		004D42471C9DFF46006CD1E4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004D42461C9DFF46006CD1E4 /* StoreKit.framework */; };
 		0051EE281C95B615001AFBB6 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 0051EE271C95B615001AFBB6 /* camera.png */; };
 		0051EE2B1C95BF4D001AFBB6 /* ScanItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0051EE2A1C95BF4D001AFBB6 /* ScanItem.m */; };
 		0051EE2E1C95E432001AFBB6 /* visionary-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0051EE2D1C95E432001AFBB6 /* visionary-icon.png */; };
@@ -17,6 +16,7 @@
 		0051EE331C95EC5D001AFBB6 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 0051EE301C95EC5D001AFBB6 /* delete.png */; };
 		0051EE341C95EC5D001AFBB6 /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = 0051EE311C95EC5D001AFBB6 /* list.png */; };
 		0051EE381C95F4F2001AFBB6 /* TextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0051EE371C95F4F2001AFBB6 /* TextView.m */; };
+		0060833B1CC3FFEE00A344F1 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0060833A1CC3FFEE00A344F1 /* StoreKit.framework */; };
 		006FE3281C9B95E600C7099A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 006FE3271C9B95E600C7099A /* GoogleService-Info.plist */; };
 		007351E41C9361D300660883 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 007351E31C9361D300660883 /* main.m */; };
 		007351E71C9361D300660883 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 007351E61C9361D300660883 /* AppDelegate.m */; };
@@ -72,7 +72,6 @@
 		002BDE741C9CAA97005E7868 /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
 		002BDE751C9CAA97005E7868 /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
 		002BDE771C9CAAD9005E7868 /* history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history.png; sourceTree = "<group>"; };
-		004D42461C9DFF46006CD1E4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0051EE271C95B615001AFBB6 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
 		0051EE291C95BF4D001AFBB6 /* ScanItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanItem.h; sourceTree = "<group>"; };
 		0051EE2A1C95BF4D001AFBB6 /* ScanItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanItem.m; sourceTree = "<group>"; };
@@ -82,6 +81,8 @@
 		0051EE311C95EC5D001AFBB6 /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list.png; sourceTree = "<group>"; };
 		0051EE361C95F4F2001AFBB6 /* TextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextView.h; sourceTree = "<group>"; };
 		0051EE371C95F4F2001AFBB6 /* TextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextView.m; sourceTree = "<group>"; };
+		0060833A1CC3FFEE00A344F1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		0060833E1CC3FFFD00A344F1 /* Visionary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Visionary.entitlements; sourceTree = "<group>"; };
 		006FE3271C9B95E600C7099A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		007351DF1C9361D300660883 /* Visionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Visionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		007351E31C9361D300660883 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ScanIt/main.m; sourceTree = "<group>"; };
@@ -135,7 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				004D42471C9DFF46006CD1E4 /* StoreKit.framework in Frameworks */,
+				0060833B1CC3FFEE00A344F1 /* StoreKit.framework in Frameworks */,
 				00F867461C970D7100868A70 /* CoreImage.framework in Frameworks */,
 				E8392441F36E63A853943DF0 /* libPods.a in Frameworks */,
 			);
@@ -181,6 +182,7 @@
 		007351D61C9361D300660883 = {
 			isa = PBXGroup;
 			children = (
+				0060833E1CC3FFFD00A344F1 /* Visionary.entitlements */,
 				007351E11C9361D300660883 /* ScanIt */,
 				007351E51C9361D300660883 /* AppDelegate.h */,
 				007351E61C9361D300660883 /* AppDelegate.m */,
@@ -296,7 +298,7 @@
 		CEC570C82910FEB966EBFC73 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				004D42461C9DFF46006CD1E4 /* StoreKit.framework */,
+				0060833A1CC3FFEE00A344F1 /* StoreKit.framework */,
 				00F867451C970D7100868A70 /* CoreImage.framework */,
 				56951794329F00F2510ABA66 /* libPods.a */,
 			);
@@ -374,6 +376,20 @@
 					007351DE1C9361D300660883 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 8NZ8K5GNH8;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+							com.apple.OMC = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 					007351F71C9361D300660883 = {
 						CreatedOnToolsVersion = 7.3;
@@ -664,6 +680,7 @@
 			baseConfigurationReference = 2D1BFB66352F66054EB385F1 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Visionary.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -684,6 +701,7 @@
 			baseConfigurationReference = DC69D754F3665C6CA3963D08 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Visionary.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
