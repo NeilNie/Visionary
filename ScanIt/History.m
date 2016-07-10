@@ -44,10 +44,12 @@
     
     static NSString *identifier = @"reuseID";
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    
     UIImageView *image = (UIImageView *)[cell viewWithTag:1];
     UILabel *text = (UILabel *)[cell viewWithTag:2];
     ScanItem *item = [allItems objectAtIndex:indexPath.row];
-    image.image = [self imageByCroppingImage:[UIImage imageWithData:item.imageData] toSize:CGSizeMake(800, 1200)];
+    image.image = [UIImage imageWithData:item.imageData];
+    //image.image = [self imageByCroppingImage:[UIImage imageWithData:item.imageData] toSize:CGSizeMake(800, 1200)];
     text.text = [[NSKeyedUnarchiver unarchiveObjectWithData:item.result] objectAtIndex:0];
     return cell;
 }

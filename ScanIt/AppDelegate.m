@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import <Google/Analytics.h>
+
+@import FirebaseAnalytics;
 
 @interface AppDelegate ()
 
@@ -19,14 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     // Configure tracker from GoogleService-Info.plist.
-    NSError *configureError;
-    [[GGLContext sharedInstance] configureWithError:&configureError];
-    NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
-    
-    // Optional: configure GAI options.
-    GAI *gai = [GAI sharedInstance];
-    gai.trackUncaughtExceptions = YES;  // report uncaught exceptions
-    gai.logger.logLevel = kGAILogLevelVerbose;  // remove before app release
+    [FIRApp configure];
     
     // Override point for customization after application launch.
     return YES;

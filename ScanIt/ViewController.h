@@ -7,27 +7,27 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AKPickerView/AKPickerView.h>
-#import <DBCamera/DBCameraViewController.h>
-#import <DBCamera/DBCameraContainerViewController.h>
-#import <DBCamera/DBCameraLibraryViewController.h>
 #import <Realm/Realm.h>
 #import "ScanItem.h"
 #import "PCAngularActivityIndicatorView.h"
-#import "DetailView.h"
+#import "detailView.h"
 #import "PreferenceStore.h"
+#import "AAPLPreviewView.h"
 
 @import GoogleMobileAds;
+@import Photos;
 
-@interface ViewController : UIViewController <AKPickerViewDelegate, AKPickerViewDataSource, DBCameraViewControllerDelegate>{
+@interface ViewController : UIViewController <AVCaptureMetadataOutputObjectsDelegate>{
     
     PCAngularActivityIndicatorView *ActivityIndicator;
     NSArray *array;
     UIImage *pickedImage;
 }
+// For use in the storyboards.
+@property (nonatomic, weak) IBOutlet AAPLPreviewView *previewView;
+@property (nonatomic, weak) IBOutlet UILabel *cameraUnavailableLabel;
+@property (nonatomic, weak) IBOutlet UIButton *resumeButton;
+@property (nonatomic, weak) IBOutlet UIButton *stillButton;
 
-@property (weak, nonatomic) IBOutlet GADBannerView *banner;
-@property (weak, nonatomic) IBOutlet AKPickerView *pickerView;
-@property (weak, nonatomic) IBOutlet UILabel *label;
 @end
 

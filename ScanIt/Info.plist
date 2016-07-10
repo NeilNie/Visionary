@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Visionary</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -57,5 +59,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>NSCameraUsageDescription</key>
+    <string>We have to use your camera</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>We have to use your microphone</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>We have to access your photo library</string>
 </dict>
 </plist>

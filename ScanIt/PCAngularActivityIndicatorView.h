@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, PCAngularActivityIndicatorViewStyle) {
  
  You control when an activity indicator animates by calling the startAnimating and stopAnimating methods. To automatically hide the activity indicator when animation stops, set the hidesWhenStopped property to YES.
  */
-@interface PCAngularActivityIndicatorView : UIView
+@interface PCAngularActivityIndicatorView : UIView <CAAnimationDelegate>
 
 /**
  The color of the activity indicator.
