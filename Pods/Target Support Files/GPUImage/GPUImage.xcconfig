@@ -1,6 +1,0 @@
-CLANG_MODULES_AUTOLINK = YES
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/GPUImage" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AKPickerView" "${PODS_ROOT}/Headers/Public/DBCamera" "${PODS_ROOT}/Headers/Public/GPUImage" "${PODS_ROOT}/Headers/Public/Google" "${PODS_ROOT}/Headers/Public/Google-Mobile-Ads-SDK" "${PODS_ROOT}/Headers/Public/GoogleAnalytics" "${PODS_ROOT}/Headers/Public/GoogleInterchangeUtilities" "${PODS_ROOT}/Headers/Public/GoogleNetworkingUtilities" "${PODS_ROOT}/Headers/Public/GoogleSymbolUtilities" "${PODS_ROOT}/Headers/Public/GoogleUtilities" "${PODS_ROOT}/Headers/Public/Realm"
-OTHER_LDFLAGS = -framework "AVFoundation" -framework "CoreMedia" -framework "OpenGLES" -framework "QuartzCore"
-PODS_ROOT = ${SRCROOT}
-SKIP_INSTALL = YES
