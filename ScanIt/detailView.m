@@ -6,13 +6,13 @@
 //  Copyright © 2016 Yongyang Nie. All rights reserved.
 //
 
-#import "detailView.h"
+#import "DetailView.h"
 
-@interface detailView ()
+@interface DetailView ()
 
 @end
 
-@implementation detailView
+@implementation DetailView
 
 #pragma UITableView Delegates
 
@@ -58,7 +58,7 @@
     NSString *string = [self.resultArray objectAtIndex:indexPath.row];
     
     if ([string length] < 40) {
-        return 48;
+        return 55;
     }else{
         int X = ((int)[string length] / 30) * 30 + 20;
         return X;
@@ -67,9 +67,13 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID" forIndexPath:indexPath];
-    cell.textLabel.text = [self.resultArray objectAtIndex:indexPath.row];
-    cell.backgroundColor = [UIColor clearColor];
+    ResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ResultCellID" forIndexPath:indexPath];
+    cell.title.text = [self.resultArray objectAtIndex:indexPath.row];
+    if (self.pickItem == 1) {
+        cell.percentage.text = [self.percentArray objectAtIndex:indexPath.row];
+    }
+    
+    cell.alpha = 0.8f;
     return cell;
 }
 
@@ -117,21 +121,15 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     // Build our API request
     NSString *type;
     
-    switch (self.pickItem.intValue) {
+    switch (self.pickItem) {
         case 0:
-            type = @"LABEL_DETECTION";
-            break;
-        case 1:
             type = @"FACE_DETECTION";
             break;
+        case 1:
+            type = @"LABEL_DETECTION";
+            break;
         case 2:
-            type = @"LANDMARK_DETECTION";
-            break;
-        case 3:
             type = @"TEXT_DETECTION";
-            break;
-        case 4:
-            type = @"LOGO_DETECTION";
             break;
             
         default:
@@ -152,9 +150,7 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     [request setHTTPBody: requestData];
     
     // Run the request on a imageView thread
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self runRequestOnimageViewThread: request];
-    });
+    [self runRequestOnimageViewThread: request];
 }
 
 - (void)runRequestOnimageViewThread: (NSMutableURLRequest*) request {
@@ -168,60 +164,49 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
 - (void)analyzeResults: (NSData*)dataToParse {
     
     // Update UI on the main thread
+    NSError *e = nil;
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:dataToParse options:kNilOptions error:&e];
+    NSArray *responses = [json objectForKey:@"responses"];
+    NSDictionary *responseData = [responses objectAtIndex: 0];
+    NSDictionary *errorObj = [json objectForKey:@"error"];
+    NSLog(@"%@", responses);
+    
     dispatch_async(dispatch_get_main_queue(), ^{
-        
-        NSError *e = nil;
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:dataToParse options:kNilOptions error:&e];
-        NSArray *responses = [json objectForKey:@"responses"];
-        NSDictionary *responseData = [responses objectAtIndex: 0];
-        NSDictionary *errorObj = [json objectForKey:@"error"];
-        NSLog(@"%@", responses);
-        
-        [ActivityIndicator stopAnimating];
-        ActivityIndicator.hidden = NO;
-        
-        // Check for errors
-        if (errorObj) {
-            
-            NSString *errorString1 = @"Error code ";
-            NSString *errorCode = [errorObj[@"code"] stringValue];
-            NSString *errorString2 = @": ";
-            NSString *errorMsg = errorObj[@"message"];
-            NSLog(@"%@%@%@%@", errorString1, errorCode, errorString2, errorMsg);
-            
-        } else {
-            
-            switch (self.pickItem.intValue) {
-                case 0:
-                    [self LabelResultWithJson:responseData];
-                    [self.ResultTable reloadData];
-                    [self showLabel];
-                    break;
-                case 1:
-                    [self FaceResultWithJson:responseData];
-                    [self.ResultTable reloadData];
-                    [self showLabel];
-                    break;
-                case 2:
-                    [self LandmarkResultWithJson:responseData];
-                    [self.ResultTable reloadData];
-                    [self showLabel];
-                    break;
-                case 3:
-                    [self TextResultWithJson:responseData];
-                    [self.ResultTable reloadData];
-                    break;
-                case 4:
-                    [self LogoResultWithJson:responseData];
-                    [self.ResultTable reloadData];
-                    [self showLabel];
-                    break;
-                    
-                default:
-                    break;
-            }
-        }
+        [ActivityIndicator removeFromSuperview];
     });
+    
+    
+    // Check for errors
+    if (errorObj) {
+        
+        NSString *errorString1 = @"Error code ";
+        NSString *errorCode = [errorObj[@"code"] stringValue];
+        NSString *errorString2 = @": ";
+        NSString *errorMsg = errorObj[@"message"];
+        NSLog(@"%@%@%@%@", errorString1, errorCode, errorString2, errorMsg);
+        
+    } else {
+        
+        switch (self.pickItem) {
+            case 0:
+                [self FaceResultWithJson:responseData];
+                [self.ResultTable reloadData];
+                [self showLabel];
+                
+                break;
+            case 1:
+                [self LabelResultWithJson:responseData];
+                [self.ResultTable reloadData];
+                [self showLabel];
+                break;
+            case 2:
+                [self TextResultWithJson:responseData];
+                [self.ResultTable reloadData];
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 #pragma mark - Private
@@ -260,7 +245,7 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
             double emotionSum = [emotionTotals[emotion] doubleValue];
             double totalPeople = [faceAnnotations count];
             double likelihoodPercent = emotionSum / totalPeople;
-            NSString *percentString = [[NSString alloc] initWithFormat:@"%2.0f%%",(likelihoodPercent*100)];
+            NSString *percentString = [[NSString alloc] initWithFormat:@"%4.0f%%",(likelihoodPercent*100)];
             NSString *emotionPercentString = [NSString stringWithFormat:@"%@: %@", emotion, percentString];
             [self.resultArray addObject:emotionPercentString];
         }
@@ -299,7 +284,10 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
 
         for (NSDictionary *label in labelAnnotations) {
             NSString *labelString = [label objectForKey:@"description"];
+            NSString *number = [label objectForKey:@"score"];
+            NSString *percent = [NSString stringWithFormat:@"%2.0f%%", [number floatValue] * 100];
             [self.resultArray addObject:labelString];
+            [self.percentArray addObject:percent];
         }
         isWeb = YES;
         self.WebView.enabled = YES;
@@ -341,8 +329,9 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     if (textAnnotations > 0) {
         
         TextViewText = [[textAnnotations objectAtIndex:0] objectForKey:@"description"];
-        [self performSegueWithIdentifier:@"ShowTextView" sender:nil];
-        self.OpenFile.enabled = YES;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSegueWithIdentifier:@"ShowTextView" sender:nil];
+        });
         
     } else {
         [self.resultArray addObject:@"Sorry, no result found"];
@@ -359,10 +348,13 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     }else{
         constraint = 180;
     }
-    [UIView animateWithDuration:0.8 animations:^{
-        self.LabelConstraint.constant = constraint;
-        [self.view layoutIfNeeded];
-    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:1 animations:^{
+            self.LabelConstraint.constant = constraint;
+            [self.view layoutIfNeeded];
+            
+        }];
+    });
 }
 
 - (IBAction)search:(id)sender {
@@ -377,7 +369,6 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
         }else{
             [self performSegueWithIdentifier:@"ShowMap" sender:nil];
         }
-        
     });
 }
 
@@ -405,6 +396,7 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
 }
 
 -(void)animationActivityIndicator{
+    
     ActivityIndicator = [[PCAngularActivityIndicatorView alloc] initWithActivityIndicatorStyle:PCAngularActivityIndicatorViewStyleLarge];
     ActivityIndicator.color = [UIColor whiteColor];
     ActivityIndicator.center = self.view.center;
@@ -429,6 +421,7 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     NSString *binaryImageData = [self base64EncodeImage:self.image];
     [self createRequest:binaryImageData];
     self.resultArray = [NSMutableArray array];
+    self.percentArray = [NSMutableArray array];
 
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.

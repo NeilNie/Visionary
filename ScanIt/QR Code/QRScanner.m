@@ -32,12 +32,14 @@
     
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = self.lblStatus.text;
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Great!"
-                                                    message:@"Saved to pasteboard"
-                                                   delegate:self
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Great!"
+                                                                   message:@"Saved to pasteboard"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel
+                                                          handler:^(UIAlertAction * action) {}];
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (IBAction)openWeb:(id)sender {

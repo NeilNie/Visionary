@@ -12,11 +12,11 @@
 #import "WebPage.h"
 #import "TextView.h"
 #import "PreferenceStore.h"
+#import "ResultTableViewCell.h"
 
-@interface detailView : UIViewController <UITableViewDelegate, UITableViewDataSource>{
+@interface DetailView : UIViewController <UITableViewDelegate, UITableViewDataSource>{
     
     PCAngularActivityIndicatorView *ActivityIndicator;
-    NSUInteger pickedItem;
     NSString *ObjectString;
     NSString *TextViewText;
     
@@ -24,8 +24,9 @@
 }
 
 @property (strong, nonatomic) UIImage *image;
-@property (strong, nonatomic) NSNumber *pickItem;
+@property NSUInteger pickItem;
 @property (strong, nonatomic) NSMutableArray *resultArray;
+@property (strong, nonatomic) NSMutableArray *percentArray;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *LabelConstraint;
 @property (weak, nonatomic) IBOutlet UITableView *ResultTable;

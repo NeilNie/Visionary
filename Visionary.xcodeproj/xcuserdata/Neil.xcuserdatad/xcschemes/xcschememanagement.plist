@@ -4,7 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Visionary.xcscheme</key>
+		<key>Visionary Widget.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>Visionary.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -23,6 +28,11 @@
 			<true/>
 		</dict>
 		<key>007352021C9361D300660883</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>288C20DF1D32A58600B3A347</key>
 		<dict>
 			<key>primary</key>
 			<true/>

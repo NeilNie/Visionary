@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11163.2" systemVersion="16A239j" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11133"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ResultCellID" rowHeight="50" id="fWH-aG-40q" customClass="ResultTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.69999999999999996" contentMode="center" tableViewCell="fWH-aG-40q" id="7BZ-gE-syZ">
+                <frame key="frameInset" width="375" height="49.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zI4-eT-9Jb">
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGa-h7-94E">
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" red="0.16078431369999999" green="0.76470588240000004" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstItem="zI4-eT-9Jb" firstAttribute="centerY" secondItem="7BZ-gE-syZ" secondAttribute="centerY" id="G4i-Yv-rBm"/>
+                    <constraint firstItem="zI4-eT-9Jb" firstAttribute="trailing" secondItem="7BZ-gE-syZ" secondAttribute="trailingMargin" id="P6v-c1-hBD"/>
+                    <constraint firstItem="iGa-h7-94E" firstAttribute="centerY" secondItem="7BZ-gE-syZ" secondAttribute="centerY" id="uSk-CU-wAR"/>
+                    <constraint firstItem="iGa-h7-94E" firstAttribute="leading" secondItem="7BZ-gE-syZ" secondAttribute="leadingMargin" id="zyP-um-h6Y"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="percentage" destination="zI4-eT-9Jb" id="nNm-gq-aWR"/>
+                <outlet property="title" destination="iGa-h7-94E" id="aus-GB-uvG"/>
+            </connections>
+            <point key="canvasLocation" x="50" y="111"/>
+        </tableViewCell>
+    </objects>
+</document>

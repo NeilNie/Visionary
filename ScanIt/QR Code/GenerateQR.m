@@ -25,13 +25,14 @@
 
 - (IBAction)save:(id)sender {
     
-    UIImageWriteToSavedPhotosAlbum(self.image.image, nil, nil, nil);
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"QR code saved"
-                                                    message:nil
-                                                   delegate:self
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
+    UIImageWriteToSavedPhotosAlbum(self.image.image, nil, nil, nil);    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Great!"
+                                                                   message:@"QR code saved"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel
+                                                          handler:^(UIAlertAction * action) {}];
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 -(IBAction)generate:(id)sender{

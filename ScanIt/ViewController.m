@@ -17,9 +17,20 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
     AVCamSetupResultSessionConfigurationFailed
 };
 
+typedef NS_ENUM( NSInteger, CVScanMode ) {
+    CVScanModeFace,
+    CVScanModeLabel,
+    CVScanModeText,
+    CVScanModeQR
+};
+
 @interface ViewController ()
 
 // Utilities.
+@property(nonatomic) CGPoint startPoint;
+
+@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
+@property (nonatomic) CVScanMode ScanMode;
 @property (nonatomic) AVCamSetupResult setupResult;
 @property (nonatomic, getter=isSessionRunning) BOOL sessionRunning;
 @property (nonatomic) UIBackgroundTaskIdentifier backgroundRecordingID;
@@ -173,7 +184,7 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
     }
 }
 
-#pragma mark Actions
+#pragma mark - Actions
 
 - (IBAction)resumeInterruptedSession:(id)sender
 {
@@ -211,7 +222,7 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
         connection.videoOrientation = previewLayer.connection.videoOrientation;
         
         // Flash set to Auto for Still Capture.
-        [ViewController setFlashMode:AVCaptureFlashModeAuto forDevice:self.videoDeviceInput.device];
+        [ViewController setFlashMode:AVCaptureFlashModeOff forDevice:self.videoDeviceInput.device];
         
         // Capture a still image.
         [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:connection completionHandler:^( CMSampleBufferRef imageDataSampleBuffer, NSError *error ) {
@@ -219,43 +230,22 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
                 // The sample buffer is not retained. Create image data before saving the still image to the photo library asynchronously.
                 NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
                 [PHPhotoLibrary requestAuthorization:^( PHAuthorizationStatus status ) {
-                    if ( status == PHAuthorizationStatusAuthorized ) {
-                        // To preserve the metadata, we create an asset from the JPEG NSData representation.
-                        // Note that creating an asset from a UIImage discards the metadata.
-                        // In iOS 9, we can use -[PHAssetCreationRequest addResourceWithType:data:options].
-                        // In iOS 8, we save the image to a temporary file and use +[PHAssetChangeRequest creationRequestForAssetFromImageAtFileURL:].
-                        if ( [PHAssetCreationRequest class] ) {
-                            [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-                                [[PHAssetCreationRequest creationRequestForAsset] addResourceWithType:PHAssetResourceTypePhoto data:imageData options:nil];
-                            } completionHandler:^( BOOL success, NSError *error ) {
-                                if ( ! success ) {
-                                    NSLog( @"Error occurred while saving image to photo library: %@", error );
-                                }
-                            }];
-                        }
-                        else {
-                            NSString *temporaryFileName = [NSProcessInfo processInfo].globallyUniqueString;
-                            NSString *temporaryFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[temporaryFileName stringByAppendingPathExtension:@"jpg"]];
-                            NSURL *temporaryFileURL = [NSURL fileURLWithPath:temporaryFilePath];
-                            
-                            [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-                                NSError *error = nil;
-                                [imageData writeToURL:temporaryFileURL options:NSDataWritingAtomic error:&error];
-                                if ( error ) {
-                                    NSLog( @"Error occured while writing image data to a temporary file: %@", error );
-                                }
-                                else {
-                                    [PHAssetChangeRequest creationRequestForAssetFromImageAtFileURL:temporaryFileURL];
-                                }
-                            } completionHandler:^( BOOL success, NSError *error ) {
-                                if ( ! success ) {
-                                    NSLog( @"Error occurred while saving image to photo library: %@", error );
-                                }
-                                
-                                // Delete the temporary file.
-                                [[NSFileManager defaultManager] removeItemAtURL:temporaryFileURL error:nil];
-                            }];
-                        }
+                    // To preserve the metadata, we create an asset from the JPEG NSData representation.
+                    // Note that creating an asset from a UIImage discards the metadata.
+                    // In iOS 9, we can use -[PHAssetCreationRequest addResourceWithType:data:options].
+                    if ( [PHAssetCreationRequest class] ) {
+                        [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+                            [[PHAssetCreationRequest creationRequestForAsset] addResourceWithType:PHAssetResourceTypePhoto data:imageData options:nil];
+                        } completionHandler:^( BOOL success, NSError *error ) {
+                            if (success ) {
+                                pickedImage = [UIImage imageWithData:imageData];
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self performSegueWithIdentifier:@"ShowDetail" sender:nil];
+                                });
+                            }else{
+                                NSLog( @"Error occurred while saving image to photo library: %@", error );
+                            }
+                        }];
                     }
                 }];
             }
@@ -264,6 +254,76 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
             }
         }];
     } );
+}
+
+- (IBAction)changeCamera:(id)sender
+{
+    self.cameraButton.enabled = NO;
+    self.stillButton.enabled = NO;
+    
+    dispatch_async( self.sessionQueue, ^{
+        AVCaptureDevice *currentVideoDevice = self.videoDeviceInput.device;
+        AVCaptureDevicePosition preferredPosition = AVCaptureDevicePositionUnspecified;
+        AVCaptureDevicePosition currentPosition = currentVideoDevice.position;
+        
+        switch ( currentPosition )
+        {
+            case AVCaptureDevicePositionUnspecified:
+            case AVCaptureDevicePositionFront:
+                preferredPosition = AVCaptureDevicePositionBack;
+                break;
+            case AVCaptureDevicePositionBack:
+                preferredPosition = AVCaptureDevicePositionFront;
+                break;
+        }
+        
+        AVCaptureDevice *videoDevice = [ViewController deviceWithMediaType:AVMediaTypeVideo preferringPosition:preferredPosition];
+        AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:nil];
+        
+        [self.session beginConfiguration];
+        
+        // Remove the existing device input first, since using the front and back camera simultaneously is not supported.
+        [self.session removeInput:self.videoDeviceInput];
+        
+        if ( [self.session canAddInput:videoDeviceInput] ) {
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:currentVideoDevice];
+            
+            [ViewController setFlashMode:AVCaptureFlashModeOff forDevice:videoDevice];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subjectAreaDidChange:) name:AVCaptureDeviceSubjectAreaDidChangeNotification object:videoDevice];
+            
+            [self.session addInput:videoDeviceInput];
+            self.videoDeviceInput = videoDeviceInput;
+        }
+        else {
+            [self.session addInput:self.videoDeviceInput];
+        }
+        
+        [self.session commitConfiguration];
+        
+        dispatch_async( dispatch_get_main_queue(), ^{
+            self.cameraButton.enabled = YES;
+            self.stillButton.enabled = YES;
+        } );
+    } );
+}
+
+- (IBAction)turnTorchOn:(id)sender{
+    
+    // check if flashlight available
+    Class captureDeviceClass = NSClassFromString(@"AVCaptureDevice");
+    if (captureDeviceClass != nil) {
+        AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+        if ([device hasTorch]){
+            
+            [device lockForConfiguration:nil];
+            if (device.torchMode == AVCaptureTorchModeOn) {
+                [device setTorchMode:AVCaptureTorchModeOn];
+            } else {
+                [device setTorchMode:AVCaptureTorchModeOff];
+            }
+            [device unlockForConfiguration];
+        }
+    }
 }
 
 - (IBAction)focusAndExposeTap:(UIGestureRecognizer *)gestureRecognizer
@@ -326,8 +386,63 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
             break;
         }
     }
-    
     return captureDevice;
+}
+
+#pragma mark - AVCaptureMetadataOutputObjectsDelegate method implementation
+
+-(void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection{
+    
+    // Check if the metadataObjects array is not nil and it contains at least one object.
+    if (metadataObjects != nil && [metadataObjects count] > 0) {
+        // Get the metadata object.
+        AVMetadataMachineReadableCodeObject *metadataObj = [metadataObjects objectAtIndex:0];
+        if ([[metadataObj type] isEqualToString:AVMetadataObjectTypeQRCode]) {
+            
+            // If the found metadata is equal to the QR code metadata then update the status label's text,
+            // stop reading and change the bar button item's title and the flag's value.
+            // Everything is done on the main thread.
+            [_lblStatus performSelectorOnMainThread:@selector(setText:) withObject:[metadataObj stringValue] waitUntilDone:NO];
+            [self performSelectorOnMainThread:@selector(stopReading) withObject:nil waitUntilDone:NO];
+            
+            self.sessionRunning = self.session.isRunning;
+            
+            // If the audio player is not nil, then play the sound effect.
+            if (_audioPlayer) {
+                [_audioPlayer play];
+            }
+        }
+    }
+}
+
+-(void)stopReading{
+    
+    dispatch_async( self.sessionQueue, ^{
+        if ( self.setupResult == AVCamSetupResultSuccess ) {
+            [self.session stopRunning];
+            [self removeObservers];
+        }
+    } );
+}
+
+-(void)loadBeepSound{
+    // Get the path to the beep.mp3 file and convert it to a NSURL object.
+    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"beep" ofType:@"mp3"];
+    NSURL *beepURL = [NSURL URLWithString:beepFilePath];
+    
+    NSError *error;
+    
+    // Initialize the audio player object using the NSURL object previously set.
+    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:beepURL error:&error];
+    if (error) {
+        // If the audio player cannot be initialized then log a message.
+        NSLog(@"Could not play beep file.");
+        NSLog(@"%@", [error localizedDescription]);
+    }
+    else{
+        // If the audio player was successfully initialized then load it in memory.
+        [_audioPlayer prepareToPlay];
+    }
 }
 
 -(void)setUpCam{
@@ -378,84 +493,102 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
         }
     }
     
-    // Setup the capture session.
-    // In general it is not safe to mutate an AVCaptureSession or any of its inputs, outputs, or connections from multiple threads at the same time.
-    // Why not do all of this on the main queue?
-    // Because -[AVCaptureSession startRunning] is a blocking call which can take a long time. We dispatch session setup to the sessionQueue
-    // so that the main queue isn't blocked, which keeps the UI responsive.
-    dispatch_async( self.sessionQueue, ^{
-        if ( self.setupResult != AVCamSetupResultSuccess ) {
-            return;
-        }
+    
+    if (self.ScanMode == CVScanModeQR) {
+        // Initialize a AVCaptureMetadataOutput object and set it as the output device to the capture session.
+        AVCaptureMetadataOutput *captureMetadataOutput = [[AVCaptureMetadataOutput alloc] init];
+        [self.session addOutput:captureMetadataOutput];
         
-        self.backgroundRecordingID = UIBackgroundTaskInvalid;
-        NSError *error = nil;
+        // Create a new serial dispatch queue.
+        dispatch_queue_t dispatchQueue;
+        dispatchQueue = dispatch_queue_create("myQueue", NULL);
+        [captureMetadataOutput setMetadataObjectsDelegate:self queue:dispatchQueue];
+        [captureMetadataOutput setMetadataObjectTypes:[NSArray arrayWithObject:AVMetadataObjectTypeQRCode]];
         
-        AVCaptureDevice *videoDevice = [ViewController deviceWithMediaType:AVMediaTypeVideo preferringPosition:AVCaptureDevicePositionBack];
-        AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:&error];
-        
-        if ( ! videoDeviceInput ) {
-            NSLog( @"Could not create video device input: %@", error );
-        }
-        
-        [self.session beginConfiguration];
-        
-        if ( [self.session canAddInput:videoDeviceInput] ) {
-            [self.session addInput:videoDeviceInput];
-            self.videoDeviceInput = videoDeviceInput;
-            
-            dispatch_async( dispatch_get_main_queue(), ^{
-                // Why are we dispatching this to the main queue?
-                // Because AVCaptureVideoPreviewLayer is the backing layer for AAPLPreviewView and UIView
-                // can only be manipulated on the main thread.
-                // Note: As an exception to the above rule, it is not necessary to serialize video orientation changes
-                // on the AVCaptureVideoPreviewLayer’s connection with other session manipulation.
-                
-                // Use the status bar orientation as the initial video orientation. Subsequent orientation changes are handled by
-                // -[viewWillTransitionToSize:withTransitionCoordinator:].
-                UIInterfaceOrientation statusBarOrientation = [UIApplication sharedApplication].statusBarOrientation;
-                AVCaptureVideoOrientation initialVideoOrientation = AVCaptureVideoOrientationPortrait;
-                if ( statusBarOrientation != UIInterfaceOrientationUnknown ) {
-                    initialVideoOrientation = (AVCaptureVideoOrientation)statusBarOrientation;
-                }
-                
-                AVCaptureVideoPreviewLayer *previewLayer = (AVCaptureVideoPreviewLayer *)self.previewView.layer;
-                previewLayer.connection.videoOrientation = initialVideoOrientation;
-            } );
-        }
-        else {
-            NSLog( @"Could not add video device input to the session" );
-            self.setupResult = AVCamSetupResultSessionConfigurationFailed;
-        }
-        
-        AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
-        AVCaptureDeviceInput *audioDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
-        
-        if ( ! audioDeviceInput ) {
-            NSLog( @"Could not create audio device input: %@", error );
-        }
-        
-        if ( [self.session canAddInput:audioDeviceInput] ) {
-            [self.session addInput:audioDeviceInput];
-        }
-        else {
-            NSLog( @"Could not add audio device input to the session" );
-        }
-        
-        AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
-        if ( [self.session canAddOutput:stillImageOutput] ) {
-            stillImageOutput.outputSettings = @{AVVideoCodecKey : AVVideoCodecJPEG};
-            [self.session addOutput:stillImageOutput];
-            self.stillImageOutput = stillImageOutput;
-        }
-        else {
-            NSLog( @"Could not add still image output to the session" );
-            self.setupResult = AVCamSetupResultSessionConfigurationFailed;
-        }
-        
+        // Start video capture.
         [self.session commitConfiguration];
-    } );
 
+    }else{
+        
+        // Setup the capture session.
+        // In general it is not safe to mutate an AVCaptureSession or any of its inputs, outputs, or connections from multiple threads at the same time.
+        // Why not do all of this on the main queue?
+        // Because -[AVCaptureSession startRunning] is a blocking call which can take a long time. We dispatch session setup to the sessionQueue
+        // so that the main queue isn't blocked, which keeps the UI responsive.
+        dispatch_async( self.sessionQueue, ^{
+            if ( self.setupResult != AVCamSetupResultSuccess ) {
+                return;
+            }
+            
+            self.backgroundRecordingID = UIBackgroundTaskInvalid;
+            NSError *error = nil;
+            
+            AVCaptureDevice *videoDevice = [ViewController deviceWithMediaType:AVMediaTypeVideo preferringPosition:AVCaptureDevicePositionBack];
+            AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:&error];
+            
+            if ( ! videoDeviceInput ) {
+                NSLog( @"Could not create video device input: %@", error );
+            }
+            
+            [self.session beginConfiguration];
+            
+            if ( [self.session canAddInput:videoDeviceInput] ) {
+                [self.session addInput:videoDeviceInput];
+                self.videoDeviceInput = videoDeviceInput;
+                
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    // Why are we dispatching this to the main queue?
+                    // Because AVCaptureVideoPreviewLayer is the backing layer for AAPLPreviewView and UIView
+                    // can only be manipulated on the main thread.
+                    // Note: As an exception to the above rule, it is not necessary to serialize video orientation changes
+                    // on the AVCaptureVideoPreviewLayer’s connection with other session manipulation.
+                    
+                    // Use the status bar orientation as the initial video orientation. Subsequent orientation changes are handled by
+                    // -[viewWillTransitionToSize:withTransitionCoordinator:].
+                    UIInterfaceOrientation statusBarOrientation = [UIApplication sharedApplication].statusBarOrientation;
+                    AVCaptureVideoOrientation initialVideoOrientation = AVCaptureVideoOrientationPortrait;
+                    if ( statusBarOrientation != UIInterfaceOrientationUnknown ) {
+                        initialVideoOrientation = (AVCaptureVideoOrientation)statusBarOrientation;
+                    }
+                    
+                    AVCaptureVideoPreviewLayer *previewLayer = (AVCaptureVideoPreviewLayer *)self.previewView.layer;
+                    previewLayer.connection.videoOrientation = initialVideoOrientation;
+                } );
+            }
+            else {
+                NSLog( @"Could not add video device input to the session" );
+                self.setupResult = AVCamSetupResultSessionConfigurationFailed;
+            }
+            
+            AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
+            AVCaptureDeviceInput *audioDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
+            
+            if ( ! audioDeviceInput ) {
+                NSLog( @"Could not create audio device input: %@", error );
+            }
+            
+            if ( [self.session canAddInput:audioDeviceInput] ) {
+                [self.session addInput:audioDeviceInput];
+            }
+            else {
+                NSLog( @"Could not add audio device input to the session" );
+            }
+            
+            AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
+            if ( [self.session canAddOutput:stillImageOutput] ) {
+                stillImageOutput.outputSettings = @{AVVideoCodecKey : AVVideoCodecJPEG};
+                [self.session addOutput:stillImageOutput];
+                self.stillImageOutput = stillImageOutput;
+            }
+            else {
+                NSLog( @"Could not add still image output to the session" );
+                self.setupResult = AVCamSetupResultSessionConfigurationFailed;
+            }
+            
+            [self.session commitConfiguration];
+        } );
+    }
+    
 }
 
 -(void)startRunningCamera{
@@ -475,7 +608,7 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
             {
                 dispatch_async( dispatch_get_main_queue(), ^{
                     NSString *message = NSLocalizedString( @"AVCam doesn't have permission to use the camera, please change privacy settings", @"Alert message when the user has denied access to the camera" );
-                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"AVCam" message:message preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Visionary" message:message preferredStyle:UIAlertControllerStyleAlert];
                     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString( @"OK", @"Alert OK button" ) style:UIAlertActionStyleCancel handler:nil];
                     [alertController addAction:cancelAction];
                     // Provide quick access to Settings.
@@ -491,7 +624,7 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
             {
                 dispatch_async( dispatch_get_main_queue(), ^{
                     NSString *message = NSLocalizedString( @"Unable to capture media", @"Alert message when something goes wrong during capture session configuration" );
-                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"AVCam" message:message preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Visionary" message:message preferredStyle:UIAlertControllerStyleAlert];
                     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString( @"OK", @"Alert OK button" ) style:UIAlertActionStyleCancel handler:nil];
                     [alertController addAction:cancelAction];
                     [self presentViewController:alertController animated:YES completion:nil];
@@ -501,6 +634,109 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
         }
     } );
 
+}
+
+#pragma mark - MDButton
+
+-(void)setUpButtons{
+    
+    self.btMore.mdButtonDelegate = self;
+    self.btMore.rotated = NO;
+    //invisible all related buttons
+    self.btQR.alpha = 0.f;
+    self.btFace.alpha = 0.f;
+    self.btText.alpha = 0.f;
+    self.btLabel.alpha = 0.f;
+    
+    _startPoint = CGPointMake(self.btMore.center.x - 18, self.btMore.center.y - 100);
+    self.btQR.center = _startPoint;
+    self.btLabel.center = _startPoint;
+    self.btText.center = _startPoint;
+    self.btFace.center = _startPoint;
+    [self.btMore setImageSize:25.0f];
+}
+
+- (IBAction)btnClicked:(id)sender {
+    
+    if (sender == self.btMore) {
+        self.btMore.rotated = NO; //reset floating finging button
+        return;
+    }
+    if (sender == self.btFace) {
+        self.indicationLb.text = @"Face and Emotions";
+        self.ScanMode = CVScanModeFace;
+    }
+    if (sender == self.btText) {
+        self.indicationLb.text = @"Smart OCR";
+        self.ScanMode = CVScanModeText;
+    }
+    if (sender == self.btLabel) {
+        self.indicationLb.text = @"Content and Labels";
+        self.ScanMode = CVScanModeLabel;
+    }
+    if (sender == self.btQR) {
+        self.indicationLb.text = @"QR Code";
+        self.ScanMode = CVScanModeQR;
+    }
+}
+
+-(void)rotationStarted:(id)sender {
+    
+    if (self.btMore == sender){
+        int padding = 90;
+        CGFloat duration = 0.2f;
+        if (!self.btMore.isRotated) {
+            [UIView animateWithDuration:duration
+                                  delay:0.0
+                                options: (UIViewAnimationOptionAllowUserInteraction|UIViewAnimationCurveEaseOut)
+                             animations:^{
+                                 self.btQR.alpha = 1;
+                                 self.btQR.transform = CGAffineTransformMakeScale(1.0,.4);
+                                 self.btQR.transform = CGAffineTransformConcat(CGAffineTransformMakeTranslation(0, +padding*4.6f), CGAffineTransformMakeScale(1.0, 1.0));
+                                 
+                                 self.btFace.alpha = 1;
+                                 self.btFace.transform = CGAffineTransformMakeScale(1.0,.5);
+                                 self.btFace.transform = CGAffineTransformConcat(CGAffineTransformMakeTranslation(0, +padding*3.9f), CGAffineTransformMakeScale(1.0, 1.0));
+                                 
+                                 self.btText.alpha = 1;
+                                 self.btText.transform = CGAffineTransformMakeScale(1.0,.5);
+                                 self.btText.transform = CGAffineTransformConcat(CGAffineTransformMakeTranslation(0, +padding*3.2f), CGAffineTransformMakeScale(1.0, 1.0));
+                                 
+                                 self.btLabel.alpha = 1;
+                                 self.btLabel.transform = CGAffineTransformMakeScale(1.0,.6);
+                                 self.btLabel.transform = CGAffineTransformConcat(CGAffineTransformMakeTranslation(0, +padding*2.5f), CGAffineTransformMakeScale(1.0, 1.0));
+                                 
+                             } completion:^(BOOL finished) {
+                                 
+                             }];
+        } else {
+            [UIView animateWithDuration:duration/2
+                                  delay:0.0
+                                options: kNilOptions
+                             animations:^{
+                                 self.btLabel.alpha = 0;
+                                 self.btLabel.transform = CGAffineTransformMakeTranslation(0, 0);
+                                 
+                                 self.btText.alpha = 0;
+                                 self.btText.transform = CGAffineTransformMakeTranslation(0, 0);
+                                 
+                                 self.btFace.alpha = 0;
+                                 self.btFace.transform = CGAffineTransformMakeTranslation(0, 0);
+                                 
+                                 self.btQR.alpha = 0;
+                                 self.btQR.transform = CGAffineTransformMakeTranslation(0, 0);
+                                 
+                             } completion:^(BOOL finished) {
+                                 
+                             }];
+        }
+    }
+}
+-(void)rotationCompleted:(id)sender{
+    
+    if (self.btMore == sender){
+        //NSLog(@"btShare rotationCompleted %s", self.btMore.isRotated?"rotated":"normal");
+    }
 }
 
 #pragma mark - Life Cycle
@@ -525,9 +761,10 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
 
 - (void)viewDidLoad {
     
+    self.ScanMode = CVScanModeLabel;
+    self.indicationLb.text = @"Content and Labels";
+    [self setUpButtons];
     [self setUpCam];
-    array = [[NSArray alloc] initWithObjects:@"Label", @"Face", @"Landmark", @"Text", @"Logo", nil];
-    
     self.previewView.frame = self.view.frame;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -542,10 +779,10 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([[segue destinationViewController] isKindOfClass:[detailView class]]) {
-        detailView *destination =(detailView *)segue.destinationViewController;
+    if ([[segue destinationViewController] isKindOfClass:[DetailView class]]) {
+        DetailView *destination =(DetailView *)segue.destinationViewController;
+        destination.pickItem = self.ScanMode;
         destination.image = pickedImage;
-        destination.pickItem = [NSNumber numberWithInteger:1];
     }
 }
 
