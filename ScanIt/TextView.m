@@ -13,6 +13,21 @@
 @end
 
 @implementation TextView
+
+-(void)dismissReaderViewController:(ReaderViewController *)viewController{
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(IBAction)generatePDF:(id)sender{
+
+    PDFRender *render = [[PDFRender alloc] initWithName:@"userpdf" content:self.text];
+    render.delegate = self;
+    render.parentVC = self;
+    [render generatePDF];
+    [render showPDF];
+}
+
 - (IBAction)copy:(id)sender {
 
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];

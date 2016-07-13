@@ -161,7 +161,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NUZ-fk-dqI" customClass="AAPLPreviewView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NUZ-fk-dqI" customClass="AAPLPreviewView">
                                 <frame key="frameInset" minX="-22" minY="-10" width="25" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -170,7 +170,7 @@
                                     <outletCollection property="gestureRecognizers" destination="Rgo-sZ-5OX" appends="YES" id="fLJ-GF-RFy"/>
                                 </connections>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIy-sj-gPK" customClass="MDButton">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIy-sj-gPK" customClass="MDButton">
                                 <frame key="frameInset" minX="62" minY="-65" width="45" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.23507851360000001" green="0.80217784640000001" blue="0.83148151640000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -184,7 +184,7 @@
                                     <action selector="btnClicked:" destination="FIO-Oa-PcR" eventType="touchUpInside" id="qrM-xh-Dib"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgB-yg-SpC" customClass="MDButton">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgB-yg-SpC" customClass="MDButton">
                                 <frame key="frameInset" minX="92" minY="31" width="45" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95253247019999998" green="0.4093654752" blue="0.28474447130000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -198,7 +198,7 @@
                                     <action selector="btnClicked:" destination="FIO-Oa-PcR" eventType="touchUpInside" id="cdE-8r-f1c"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M84-sA-Nbm" customClass="MDButton">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M84-sA-Nbm" customClass="MDButton">
                                 <frame key="frameInset" minX="3" minY="75" width="45" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95253247019999998" green="0.4093654752" blue="0.28474447130000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -212,7 +212,7 @@
                                     <action selector="btnClicked:" destination="FIO-Oa-PcR" eventType="touchUpInside" id="WUr-G2-RTt"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jSe-M5-Wc0" customClass="MDButton">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jSe-M5-Wc0" customClass="MDButton">
                                 <frame key="frameInset" minX="70" minY="-88" width="45" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.99307268859999998" green="0.70766103270000003" blue="0.29252845049999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -400,7 +400,7 @@
                                         <frame key="frameInset" minY="28" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.69999998807907104" contentMode="center" tableViewCell="ctC-4U-oz2" id="eHG-HZ-TwU">
-                                            <frame key="frameInset" width="375" height="49"/>
+                                            <frame key="frameInset" width="375" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qxt-pX-Gsu">
@@ -644,6 +644,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hB8-WN-RRP">
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Generate PDF"/>
+                                <connections>
+                                    <action selector="generatePDF:" destination="Ros-RT-wpu" eventType="touchUpInside" id="7go-rJ-AkZ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.1006676331" green="0.21414971350000001" blue="0.30148407820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

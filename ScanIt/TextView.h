@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PDFRender.h"
 
-@interface TextView : UIViewController
+@interface TextView : UIViewController <PDFRenderDelegate>
 
 @property (nonatomic, strong) NSString *text;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
