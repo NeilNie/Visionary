@@ -145,14 +145,6 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
         reason == AVCaptureSessionInterruptionReasonVideoDeviceInUseByAnotherClient ) {
         showResumeButton = YES;
     }
-    else if ( reason == AVCaptureSessionInterruptionReasonVideoDeviceNotAvailableWithMultipleForegroundApps ) {
-        // Simply fade-in a label to inform the user that the camera is unavailable.
-        self.cameraUnavailableLabel.hidden = NO;
-        self.cameraUnavailableLabel.alpha = 0.0;
-        [UIView animateWithDuration:0.25 animations:^{
-            self.cameraUnavailableLabel.alpha = 1.0;
-        }];
-    }
     
     if ( showResumeButton ) {
         // Simply fade-in a button to enable the user to try to resume the session running.
@@ -175,13 +167,23 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
             self.resumeButton.hidden = YES;
         }];
     }
-    if ( ! self.cameraUnavailableLabel.hidden ) {
-        [UIView animateWithDuration:0.25 animations:^{
-            self.cameraUnavailableLabel.alpha = 0.0;
-        } completion:^( BOOL finished ) {
-            self.cameraUnavailableLabel.hidden = YES;
-        }];
-    }
+}
+
+#pragma mark - UIImagePickerViewController Delegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    pickedImage = info[UIImagePickerControllerOriginalImage];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [picker dismissViewControllerAnimated:YES completion:NULL];
+        [self performSegueWithIdentifier:@"ShowDetail" sender:nil];
+    });
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 #pragma mark - Actions
@@ -210,6 +212,17 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
             } );
         }
     } );
+}
+
+- (IBAction)selectPhoto:(UIButton *)sender {
+    
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self presentViewController:picker animated:YES completion:NULL];
+    });
 }
 
 - (IBAction)snapStillImage:(id)sender
@@ -261,50 +274,46 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
     self.cameraButton.enabled = NO;
     self.stillButton.enabled = NO;
     
-    dispatch_async( self.sessionQueue, ^{
-        AVCaptureDevice *currentVideoDevice = self.videoDeviceInput.device;
-        AVCaptureDevicePosition preferredPosition = AVCaptureDevicePositionUnspecified;
-        AVCaptureDevicePosition currentPosition = currentVideoDevice.position;
+    AVCaptureDevice *currentVideoDevice = self.videoDeviceInput.device;
+    AVCaptureDevicePosition preferredPosition = AVCaptureDevicePositionUnspecified;
+    AVCaptureDevicePosition currentPosition = currentVideoDevice.position;
+    
+    switch ( currentPosition )
+    {
+        case AVCaptureDevicePositionUnspecified:
+        case AVCaptureDevicePositionFront:
+            preferredPosition = AVCaptureDevicePositionBack;
+            break;
+        case AVCaptureDevicePositionBack:
+            preferredPosition = AVCaptureDevicePositionFront;
+            break;
+    }
+    
+    AVCaptureDevice *videoDevice = [ViewController deviceWithMediaType:AVMediaTypeVideo preferringPosition:preferredPosition];
+    AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:nil];
+    
+    [self.session beginConfiguration];
+    
+    // Remove the existing device input first, since using the front and back camera simultaneously is not supported.
+    [self.session removeInput:self.videoDeviceInput];
+    
+    if ( [self.session canAddInput:videoDeviceInput] ) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:currentVideoDevice];
         
-        switch ( currentPosition )
-        {
-            case AVCaptureDevicePositionUnspecified:
-            case AVCaptureDevicePositionFront:
-                preferredPosition = AVCaptureDevicePositionBack;
-                break;
-            case AVCaptureDevicePositionBack:
-                preferredPosition = AVCaptureDevicePositionFront;
-                break;
-        }
+        [ViewController setFlashMode:AVCaptureFlashModeOff forDevice:videoDevice];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subjectAreaDidChange:) name:AVCaptureDeviceSubjectAreaDidChangeNotification object:videoDevice];
         
-        AVCaptureDevice *videoDevice = [ViewController deviceWithMediaType:AVMediaTypeVideo preferringPosition:preferredPosition];
-        AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:nil];
-        
-        [self.session beginConfiguration];
-        
-        // Remove the existing device input first, since using the front and back camera simultaneously is not supported.
-        [self.session removeInput:self.videoDeviceInput];
-        
-        if ( [self.session canAddInput:videoDeviceInput] ) {
-            [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:currentVideoDevice];
-            
-            [ViewController setFlashMode:AVCaptureFlashModeOff forDevice:videoDevice];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subjectAreaDidChange:) name:AVCaptureDeviceSubjectAreaDidChangeNotification object:videoDevice];
-            
-            [self.session addInput:videoDeviceInput];
-            self.videoDeviceInput = videoDeviceInput;
-        }
-        else {
-            [self.session addInput:self.videoDeviceInput];
-        }
-        
-        [self.session commitConfiguration];
-        
-        dispatch_async( dispatch_get_main_queue(), ^{
-            self.cameraButton.enabled = YES;
-            self.stillButton.enabled = YES;
-        } );
-    } );
+        [self.session addInput:videoDeviceInput];
+        self.videoDeviceInput = videoDeviceInput;
+    }
+    else {
+        [self.session addInput:self.videoDeviceInput];
+    }
+    
+    [self.session commitConfiguration];
+    
+    self.cameraButton.enabled = YES;
+    self.stillButton.enabled = YES;
 }
 
 - (IBAction)turnTorchOn:(id)sender{
@@ -317,9 +326,9 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
             
             [device lockForConfiguration:nil];
             if (device.torchMode == AVCaptureTorchModeOn) {
-                [device setTorchMode:AVCaptureTorchModeOn];
-            } else {
                 [device setTorchMode:AVCaptureTorchModeOff];
+            } else {
+                [device setTorchMode:AVCaptureTorchModeOn];
             }
             [device unlockForConfiguration];
         }
@@ -402,7 +411,7 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
             // If the found metadata is equal to the QR code metadata then update the status label's text,
             // stop reading and change the bar button item's title and the flag's value.
             // Everything is done on the main thread.
-            [_lblStatus performSelectorOnMainThread:@selector(setText:) withObject:[metadataObj stringValue] waitUntilDone:NO];
+            //[_lblStatus performSelectorOnMainThread:@selector(setText:) withObject:[metadataObj stringValue] waitUntilDone:NO];
             [self performSelectorOnMainThread:@selector(stopReading) withObject:nil waitUntilDone:NO];
             
             self.sessionRunning = self.session.isRunning;

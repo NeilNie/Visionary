@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Visionary Widget.xcscheme_^#shared#^_</key>
+		<key>Visionary Widget.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
@@ -33,6 +33,16 @@
 			<true/>
 		</dict>
 		<key>288C20DF1D32A58600B3A347</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>28D701C41D382E3E0022F6D5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>28D701D21D382E420022F6D5</key>
 		<dict>
 			<key>primary</key>
 			<true/>

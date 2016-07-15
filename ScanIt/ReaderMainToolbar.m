@@ -91,7 +91,7 @@
 
 		UIFont *doneButtonFont = [UIFont systemFontOfSize:BUTTON_FONT_SIZE];
 		NSString *doneButtonText = NSLocalizedString(@"Done", @"button");
-		CGSize doneButtonSize = [doneButtonText sizeWithFont:doneButtonFont];
+        CGSize doneButtonSize = [doneButtonText sizeWithAttributes:@{NSFontAttributeName: doneButtonFont}];
 		CGFloat doneButtonWidth = (doneButtonSize.width + TEXT_BUTTON_PADDING);
 
 		UIButton *doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
