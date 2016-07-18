@@ -89,10 +89,6 @@
 		28447F951D35BB7A00FBA11D /* Reader-Thumbs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28447F7D1D35BB7A00FBA11D /* Reader-Thumbs@2x.png */; };
 		28447F961D35BB7A00FBA11D /* Reader-Thumbs@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28447F7E1D35BB7A00FBA11D /* Reader-Thumbs@3x.png */; };
 		286FF3481D31792C0032F321 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286FF3471D31792C0032F321 /* Reveal.framework */; };
-		288C20E21D32A58600B3A347 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288C20E11D32A58600B3A347 /* NotificationCenter.framework */; };
-		288C20E61D32A58600B3A347 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288C20E51D32A58600B3A347 /* TodayViewController.m */; };
-		288C20E91D32A58600B3A347 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288C20E71D32A58600B3A347 /* MainInterface.storyboard */; };
-		288C20ED1D32A58600B3A347 /* Visionary Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 288C20E01D32A58600B3A347 /* Visionary Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		28912B701D333B9100B06F07 /* ResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28912B6F1D333B9100B06F07 /* ResultTableViewCell.m */; };
 		28912B721D333BA300B06F07 /* ResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28912B711D333BA300B06F07 /* ResultTableViewCell.xib */; };
 		28B3DDCC1D31E40A007CDC90 /* circle_outter.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B3DDCA1D31E40A007CDC90 /* circle_outter.png */; };
@@ -100,34 +96,8 @@
 		28B3DDCF1D31E76C007CDC90 /* close_sign.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B3DDCE1D31E76C007CDC90 /* close_sign.png */; };
 		28B3DDD11D31E889007CDC90 /* photo_album.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B3DDD01D31E889007CDC90 /* photo_album.png */; };
 		28C3E41A1D2C48B5008D9A98 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28C3E4191D2C48B5008D9A98 /* GoogleService-Info.plist */; };
-		28D701C81D382E3E0022F6D5 /* VisionaryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D701C71D382E3E0022F6D5 /* VisionaryUITests.m */; };
-		28D701D61D382E420022F6D5 /* VisionaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D701D51D382E420022F6D5 /* VisionaryTests.m */; };
 		7C37BD8936C0C8656EBE1C73 /* libPods-Visionary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A39E448A1EE1EAC5B642B652 /* libPods-Visionary.a */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		288C20EB1D32A58600B3A347 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 007351D71C9361D300660883 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 288C20DF1D32A58600B3A347;
-			remoteInfo = "Visionary Widget";
-		};
-		28D701CA1D382E3E0022F6D5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 007351D71C9361D300660883 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 007351DE1C9361D300660883;
-			remoteInfo = Visionary;
-		};
-		28D701D81D382E420022F6D5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 007351D71C9361D300660883 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 007351DE1C9361D300660883;
-			remoteInfo = Visionary;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		288C20F11D32A58600B3A347 /* Embed App Extensions */ = {
@@ -136,7 +106,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				288C20ED1D32A58600B3A347 /* Visionary Widget.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,12 +231,7 @@
 		28447F7D1D35BB7A00FBA11D /* Reader-Thumbs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Thumbs@2x.png"; sourceTree = "<group>"; };
 		28447F7E1D35BB7A00FBA11D /* Reader-Thumbs@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Thumbs@3x.png"; sourceTree = "<group>"; };
 		286FF3471D31792C0032F321 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
-		288C20E01D32A58600B3A347 /* Visionary Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Visionary Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		288C20E11D32A58600B3A347 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
-		288C20E41D32A58600B3A347 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
-		288C20E51D32A58600B3A347 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
-		288C20E81D32A58600B3A347 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		288C20EA1D32A58600B3A347 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28912B6E1D333B9100B06F07 /* ResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultTableViewCell.h; sourceTree = "<group>"; };
 		28912B6F1D333B9100B06F07 /* ResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultTableViewCell.m; sourceTree = "<group>"; };
 		28912B711D333BA300B06F07 /* ResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultTableViewCell.xib; sourceTree = "<group>"; };
@@ -276,10 +240,8 @@
 		28B3DDCE1D31E76C007CDC90 /* close_sign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close_sign.png; sourceTree = "<group>"; };
 		28B3DDD01D31E889007CDC90 /* photo_album.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo_album.png; sourceTree = "<group>"; };
 		28C3E4191D2C48B5008D9A98 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		28D701C51D382E3E0022F6D5 /* VisionaryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VisionaryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		28D701C71D382E3E0022F6D5 /* VisionaryUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VisionaryUITests.m; sourceTree = "<group>"; };
 		28D701C91D382E3E0022F6D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		28D701D31D382E420022F6D5 /* VisionaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VisionaryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		28D701D51D382E420022F6D5 /* VisionaryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VisionaryTests.m; sourceTree = "<group>"; };
 		28D701D71D382E420022F6D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A39E448A1EE1EAC5B642B652 /* libPods-Visionary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Visionary.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -296,28 +258,6 @@
 				00F867461C970D7100868A70 /* CoreImage.framework in Frameworks */,
 				7C37BD8936C0C8656EBE1C73 /* libPods-Visionary.a in Frameworks */,
 				286FF3481D31792C0032F321 /* Reveal.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		288C20DD1D32A58600B3A347 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				288C20E21D32A58600B3A347 /* NotificationCenter.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		28D701C21D382E3E0022F6D5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		28D701D01D382E420022F6D5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,7 +294,6 @@
 				286FF3471D31792C0032F321 /* Reveal.framework */,
 				0060833E1CC3FFFD00A344F1 /* Visionary.entitlements */,
 				007351E11C9361D300660883 /* ScanIt */,
-				288C20E31D32A58600B3A347 /* Visionary Widget */,
 				28D701C61D382E3E0022F6D5 /* VisionaryUITests */,
 				28D701D41D382E420022F6D5 /* VisionaryTests */,
 				007351E01C9361D300660883 /* Products */,
@@ -367,9 +306,6 @@
 			isa = PBXGroup;
 			children = (
 				007351DF1C9361D300660883 /* Visionary.app */,
-				288C20E01D32A58600B3A347 /* Visionary Widget.appex */,
-				28D701C51D382E3E0022F6D5 /* VisionaryUITests.xctest */,
-				28D701D31D382E420022F6D5 /* VisionaryTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -549,17 +485,6 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
-		288C20E31D32A58600B3A347 /* Visionary Widget */ = {
-			isa = PBXGroup;
-			children = (
-				288C20E41D32A58600B3A347 /* TodayViewController.h */,
-				288C20E51D32A58600B3A347 /* TodayViewController.m */,
-				288C20E71D32A58600B3A347 /* MainInterface.storyboard */,
-				288C20EA1D32A58600B3A347 /* Info.plist */,
-			);
-			path = "Visionary Widget";
-			sourceTree = "<group>";
-		};
 		28AFA9001D2C3E42009F0057 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -629,65 +554,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				288C20EC1D32A58600B3A347 /* PBXTargetDependency */,
 			);
 			name = Visionary;
 			productName = ScanIt;
 			productReference = 007351DF1C9361D300660883 /* Visionary.app */;
 			productType = "com.apple.product-type.application";
-		};
-		288C20DF1D32A58600B3A347 /* Visionary Widget */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 288C20F01D32A58600B3A347 /* Build configuration list for PBXNativeTarget "Visionary Widget" */;
-			buildPhases = (
-				288C20DC1D32A58600B3A347 /* Sources */,
-				288C20DD1D32A58600B3A347 /* Frameworks */,
-				288C20DE1D32A58600B3A347 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Visionary Widget";
-			productName = "Visionary Widget";
-			productReference = 288C20E01D32A58600B3A347 /* Visionary Widget.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
-		28D701C41D382E3E0022F6D5 /* VisionaryUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 28D701CE1D382E3E0022F6D5 /* Build configuration list for PBXNativeTarget "VisionaryUITests" */;
-			buildPhases = (
-				28D701C11D382E3E0022F6D5 /* Sources */,
-				28D701C21D382E3E0022F6D5 /* Frameworks */,
-				28D701C31D382E3E0022F6D5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				28D701CB1D382E3E0022F6D5 /* PBXTargetDependency */,
-			);
-			name = VisionaryUITests;
-			productName = VisionaryUITests;
-			productReference = 28D701C51D382E3E0022F6D5 /* VisionaryUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
-		28D701D21D382E420022F6D5 /* VisionaryTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 28D701DA1D382E420022F6D5 /* Build configuration list for PBXNativeTarget "VisionaryTests" */;
-			buildPhases = (
-				28D701CF1D382E420022F6D5 /* Sources */,
-				28D701D01D382E420022F6D5 /* Frameworks */,
-				28D701D11D382E420022F6D5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				28D701D91D382E420022F6D5 /* PBXTargetDependency */,
-			);
-			name = VisionaryTests;
-			productName = VisionaryTests;
-			productReference = 28D701D31D382E420022F6D5 /* VisionaryTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -716,26 +587,6 @@
 							};
 						};
 					};
-					288C20DF1D32A58600B3A347 = {
-						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 8NZ8K5GNH8;
-						DevelopmentTeamName = "Huan He";
-						ProvisioningStyle = Automatic;
-					};
-					28D701C41D382E3E0022F6D5 = {
-						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 8NZ8K5GNH8;
-						DevelopmentTeamName = "Huan He";
-						ProvisioningStyle = Automatic;
-						TestTargetID = 007351DE1C9361D300660883;
-					};
-					28D701D21D382E420022F6D5 = {
-						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 8NZ8K5GNH8;
-						DevelopmentTeamName = "Huan He";
-						ProvisioningStyle = Automatic;
-						TestTargetID = 007351DE1C9361D300660883;
-					};
 				};
 			};
 			buildConfigurationList = 007351DA1C9361D300660883 /* Build configuration list for PBXProject "Visionary" */;
@@ -752,9 +603,6 @@
 			projectRoot = "";
 			targets = (
 				007351DE1C9361D300660883 /* Visionary */,
-				288C20DF1D32A58600B3A347 /* Visionary Widget */,
-				28D701C41D382E3E0022F6D5 /* VisionaryUITests */,
-				28D701D21D382E420022F6D5 /* VisionaryTests */,
 			);
 		};
 /* End PBXProject section */
@@ -815,28 +663,6 @@
 				28447F931D35BB7A00FBA11D /* Reader-Print@3x.png in Resources */,
 				28447F941D35BB7A00FBA11D /* Reader-Thumbs.png in Resources */,
 				28447F7F1D35BB7A00FBA11D /* Reader-Button-H.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		288C20DE1D32A58600B3A347 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				288C20E91D32A58600B3A347 /* MainInterface.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		28D701C31D382E3E0022F6D5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		28D701D11D382E420022F6D5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -978,49 +804,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		288C20DC1D32A58600B3A347 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				288C20E61D32A58600B3A347 /* TodayViewController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		28D701C11D382E3E0022F6D5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				28D701C81D382E3E0022F6D5 /* VisionaryUITests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		28D701CF1D382E420022F6D5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				28D701D61D382E420022F6D5 /* VisionaryTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		288C20EC1D32A58600B3A347 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 288C20DF1D32A58600B3A347 /* Visionary Widget */;
-			targetProxy = 288C20EB1D32A58600B3A347 /* PBXContainerItemProxy */;
-		};
-		28D701CB1D382E3E0022F6D5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 007351DE1C9361D300660883 /* Visionary */;
-			targetProxy = 28D701CA1D382E3E0022F6D5 /* PBXContainerItemProxy */;
-		};
-		28D701D91D382E420022F6D5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 007351DE1C9361D300660883 /* Visionary */;
-			targetProxy = 28D701D81D382E420022F6D5 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		007351EB1C9361D300660883 /* Main.storyboard */ = {
@@ -1037,14 +821,6 @@
 				007351F11C9361D300660883 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		288C20E71D32A58600B3A347 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				288C20E81D32A58600B3A347 /* Base */,
-			);
-			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1176,88 +952,6 @@
 			};
 			name = Release;
 		};
-		288C20EE1D32A58600B3A347 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = "Visionary Widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yongyang.vision.Visionary-Widget";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		288C20EF1D32A58600B3A347 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = "Visionary Widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yongyang.vision.Visionary-Widget";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		28D701CC1D382E3E0022F6D5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				INFOPLIST_FILE = VisionaryUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yongyang.VisionaryUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = Visionary;
-			};
-			name = Debug;
-		};
-		28D701CD1D382E3E0022F6D5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				INFOPLIST_FILE = VisionaryUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yongyang.VisionaryUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = Visionary;
-			};
-			name = Release;
-		};
-		28D701DB1D382E420022F6D5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				INFOPLIST_FILE = VisionaryTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yongyang.VisionaryTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Visionary.app/Visionary";
-			};
-			name = Debug;
-		};
-		28D701DC1D382E420022F6D5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				INFOPLIST_FILE = VisionaryTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yongyang.VisionaryTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Visionary.app/Visionary";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1278,31 +972,6 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
-		};
-		288C20F01D32A58600B3A347 /* Build configuration list for PBXNativeTarget "Visionary Widget" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				288C20EE1D32A58600B3A347 /* Debug */,
-				288C20EF1D32A58600B3A347 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		28D701CE1D382E3E0022F6D5 /* Build configuration list for PBXNativeTarget "VisionaryUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				28D701CC1D382E3E0022F6D5 /* Debug */,
-				28D701CD1D382E3E0022F6D5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
-		28D701DA1D382E420022F6D5 /* Build configuration list for PBXNativeTarget "VisionaryTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				28D701DB1D382E420022F6D5 /* Debug */,
-				28D701DC1D382E420022F6D5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

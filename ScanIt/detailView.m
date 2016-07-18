@@ -271,7 +271,7 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     } else {
         [self.resultArray addObject:@"No result found"];
     }
-    [self savetoHistoryWithString:self.resultArray];
+    //[self savetoHistoryWithString:self.resultArray];
 }
 
 -(void)LabelResultWithJson:(NSDictionary *)responseData{
@@ -295,7 +295,7 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     } else {
         [self.resultArray addObject:@"Sorry, no result found"];
     }
-    [self savetoHistoryWithString:self.resultArray];
+    //[self savetoHistoryWithString:self.resultArray];
 }
 
 -(void)LandmarkResultWithJson:(NSDictionary *)responseData{
@@ -320,7 +320,7 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     } else {
         [self.resultArray addObject:@"Sorry, no result found"];
     }
-    [self savetoHistoryWithString:self.resultArray];
+    //[self savetoHistoryWithString:self.resultArray];
 
 }
 -(void)TextResultWithJson:(NSDictionary *)responseData{
@@ -337,7 +337,7 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
         [self.resultArray addObject:@"Sorry, no result found"];
     }
     
-    [self savetoHistoryWithString:[NSMutableArray arrayWithObject:TextViewText]];
+    //[self savetoHistoryWithString:[NSMutableArray arrayWithObject:TextViewText]];
 }
 
 -(void)showLabel{
