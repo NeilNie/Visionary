@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -125,7 +125,6 @@
 		0051EE361C95F4F2001AFBB6 /* TextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextView.h; sourceTree = "<group>"; };
 		0051EE371C95F4F2001AFBB6 /* TextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextView.m; sourceTree = "<group>"; };
 		0060833A1CC3FFEE00A344F1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		0060833E1CC3FFFD00A344F1 /* Visionary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Visionary.entitlements; sourceTree = "<group>"; };
 		007351DF1C9361D300660883 /* Visionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Visionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		007351E31C9361D300660883 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		007351E51C9361D300660883 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -229,6 +228,7 @@
 		28447F7C1D35BB7A00FBA11D /* Reader-Thumbs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Thumbs.png"; sourceTree = "<group>"; };
 		28447F7D1D35BB7A00FBA11D /* Reader-Thumbs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Thumbs@2x.png"; sourceTree = "<group>"; };
 		28447F7E1D35BB7A00FBA11D /* Reader-Thumbs@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Thumbs@3x.png"; sourceTree = "<group>"; };
+		28549A951D46D92E00326D9E /* Visionary.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Visionary.entitlements; sourceTree = "<group>"; };
 		288C20E11D32A58600B3A347 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		28912B6E1D333B9100B06F07 /* ResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultTableViewCell.h; sourceTree = "<group>"; };
 		28912B6F1D333B9100B06F07 /* ResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultTableViewCell.m; sourceTree = "<group>"; };
@@ -288,7 +288,7 @@
 		007351D61C9361D300660883 = {
 			isa = PBXGroup;
 			children = (
-				0060833E1CC3FFFD00A344F1 /* Visionary.entitlements */,
+				28549A951D46D92E00326D9E /* Visionary.entitlements */,
 				007351E11C9361D300660883 /* ScanIt */,
 				28D701C61D382E3E0022F6D5 /* VisionaryUITests */,
 				28D701D41D382E420022F6D5 /* VisionaryTests */,
@@ -586,7 +586,7 @@
 				};
 			};
 			buildConfigurationList = 007351DA1C9361D300660883 /* Build configuration list for PBXProject "Visionary" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
