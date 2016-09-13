@@ -14,6 +14,8 @@
 #import "PreferenceStore.h"
 #import "ResultTableViewCell.h"
 
+@import GoogleMobileAds;
+
 @interface DetailView : UIViewController <UITableViewDelegate, UITableViewDataSource>{
     
     PCAngularActivityIndicatorView *ActivityIndicator;
@@ -33,5 +35,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIButton *OpenFile;
 @property (weak, nonatomic) IBOutlet UIButton *WebView;
+
+@property (weak, nonatomic) IBOutlet *
 
 @end
