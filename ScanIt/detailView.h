@@ -36,6 +36,4 @@
 @property (weak, nonatomic) IBOutlet UIButton *OpenFile;
 @property (weak, nonatomic) IBOutlet UIButton *WebView;
 
-@property (weak, nonatomic) IBOutlet *
-
 @end
