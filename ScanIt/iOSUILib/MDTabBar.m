@@ -47,7 +47,7 @@
 @end
 
 @implementation MDSegmentedControl {
-  UIView *indicatorView;
+  __strong UIView *indicatorView;
   UIView *beingTouchedView;
   UIFont *font;
   MDTabBar *tabBar;
@@ -273,10 +273,6 @@
   // subviews of UISegmentedControl.
   // May break in iOS updates.
 
-  // Sorting may fail if there are segments that haven't been laid out yet
-  // (e.g. two segments w/ origin.x == 0), so we do so now.
-  [self layoutIfNeeded];
-
   NSMutableArray *segments =
       [NSMutableArray arrayWithCapacity:self.numberOfSegments];
   for (UIView *view in self.subviews) {
@@ -377,6 +373,7 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    
   [super touchesEnded:touches withEvent:event];
   if (beingTouchedView) {
     for (CALayer *layer in beingTouchedView.layer.sublayers) {

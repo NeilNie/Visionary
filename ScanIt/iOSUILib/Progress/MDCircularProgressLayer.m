@@ -146,8 +146,6 @@ CAMediaTimingFunction *timmingFunction;
   self.frame =
       CGRectMake(center.x - _cirleDiameter / 2, center.y - _cirleDiameter / 2,
                  _cirleDiameter, _cirleDiameter);
-    _trackLayer.frame = self.bounds;
-    _progressLayer.frame = self.bounds;
 }
 
 - (void)updateContents {
@@ -208,7 +206,7 @@ CAMediaTimingFunction *timmingFunction;
                                                    withValueScale:anArc]];
       startValue += anArc * (kMDMaxStrokeLength + kMDMinStrokeLength);
       startTime += animationDuration * 2;
-    } while (!fmodf(floorf(startValue * 1000), 1000) == 0);
+    } while ((!fmodf(floorf(startValue * 1000), 1000)) == 0);
 
     animationGroups = [CAAnimationGroup animation];
     animationGroups.duration = startTime;

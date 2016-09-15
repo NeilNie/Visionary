@@ -16,7 +16,7 @@
 
 @import GoogleMobileAds;
 
-@interface DetailView : UIViewController <UITableViewDelegate, UITableViewDataSource>{
+@interface DetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>{
     
     PCAngularActivityIndicatorView *ActivityIndicator;
     NSString *ObjectString;

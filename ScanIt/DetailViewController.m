@@ -6,13 +6,16 @@
 //  Copyright © 2016 Yongyang Nie. All rights reserved.
 //
 
-#import "DetailView.h"
+#import "DetailViewController.h"
 
-@interface DetailView ()
+@interface DetailViewController ()
 
 @end
 
-@implementation DetailView
+@implementation DetailViewController
+
+/** some code excerpted from Google example project, source code and documentations **/
+/** developers.google.com **/
 
 #pragma UITableView Delegates
 

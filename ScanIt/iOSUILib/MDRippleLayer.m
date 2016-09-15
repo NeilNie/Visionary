@@ -36,7 +36,7 @@
 @interface MDRippleLayer () <MDTouchGestureRecognizerDelegate,
                              UIGestureRecognizerDelegate>
 
-@property CALayer *superLayer;
+@property (weak) CALayer *superLayer;
 @property CAShapeLayer *rippleLayer;
 @property CAShapeLayer *backgroundLayer;
 @property CAShapeLayer *maskLayer;
@@ -46,8 +46,10 @@
 @end
 
 @implementation MDRippleLayer {
-  UIView *superView;
+  __weak UIView *superView;
 }
+
+@synthesize delegate;
 
 // static float clearEffectDuration = 0.3;
 

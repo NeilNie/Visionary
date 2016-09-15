@@ -298,7 +298,6 @@ MDSnackbarManger *snackbarManagerInstance;
           isAnimating = false;
           [self performDelegateAction:@selector(snackbarDidAppear:)];
 
-            if(_duration > 0)
           [self performSelector:@selector(dismiss)
                      withObject:nil
                      afterDelay:_duration];

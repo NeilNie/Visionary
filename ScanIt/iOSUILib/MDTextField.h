@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 IB_DESIGNABLE
-@interface MDTextField : UIControl
+@interface MDTextField : UIControl <CAAnimationDelegate>
 
 @property(null_unspecified, nonatomic) IBInspectable NSString *hint;
 @property(null_unspecified, nonatomic) IBInspectable NSString *label;
@@ -107,7 +107,7 @@ IB_DESIGNABLE
 @property(nonnull, nonatomic) NSLayoutConstraint *textViewHeightConstraint;
 @property(nullable, nonatomic) NSArray<NSString *> *suggestionsDictionary;
 
-@property(nonatomic, weak) id<MDTextFieldDelegate> delegate;
+@property(nonatomic, retain, nonnull) id <MDTextFieldDelegate> delegate;
 @property(nonatomic, nullable, readwrite, strong) UIView *inputAccessoryView;
 
 - (float)requiredHeightWithNumberOfTextLines:(NSUInteger)numberOfLines;
