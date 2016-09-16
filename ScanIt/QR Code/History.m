@@ -1,14 +1,14 @@
 //
-//  ScanItem.m
+//  History.m
 //  Visionary
 //
-//  Created by Yongyang Nie on 3/13/16.
+//  Created by Yongyang Nie on 9/15/16.
 //  Copyright © 2016 Yongyang Nie. All rights reserved.
 //
 
-#import "ScanItem.h"
+#import "History.h"
 
-@implementation ScanItem
+@implementation History
 
 // Specify default values for properties
 

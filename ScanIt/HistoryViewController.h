@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <Realm/Realm.h>
-#import "ScanItem.h"
+#import "History.h"
 #import "PreferenceStore.h"
 
 @import GoogleMobileAds;
 
-@interface History : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource> {
+@interface HistoryViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource> {
     RLMResults *allItems;
 }
 @property (weak, nonatomic) IBOutlet GADBannerView *banner;

@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		002BDE761C9CAA97005E7868 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 002BDE751C9CAA97005E7868 /* History.m */; };
+		002BDE761C9CAA97005E7868 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 002BDE751C9CAA97005E7868 /* HistoryViewController.m */; };
 		002BDE781C9CAAD9005E7868 /* history.png in Resources */ = {isa = PBXBuildFile; fileRef = 002BDE771C9CAAD9005E7868 /* history.png */; };
 		0051EE281C95B615001AFBB6 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 0051EE271C95B615001AFBB6 /* camera.png */; };
-		0051EE2B1C95BF4D001AFBB6 /* ScanItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0051EE2A1C95BF4D001AFBB6 /* ScanItem.m */; };
 		0051EE2E1C95E432001AFBB6 /* visionary-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0051EE2D1C95E432001AFBB6 /* visionary-icon.png */; };
 		0051EE321C95EC5D001AFBB6 /* webicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0051EE2F1C95EC5D001AFBB6 /* webicon.png */; };
 		0051EE331C95EC5D001AFBB6 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 0051EE301C95EC5D001AFBB6 /* delete.png */; };
@@ -118,6 +117,7 @@
 		28B3DDCF1D31E76C007CDC90 /* close_sign.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B3DDCE1D31E76C007CDC90 /* close_sign.png */; };
 		28B3DDD11D31E889007CDC90 /* photo_album.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B3DDD01D31E889007CDC90 /* photo_album.png */; };
 		28C3E41A1D2C48B5008D9A98 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28C3E4191D2C48B5008D9A98 /* GoogleService-Info.plist */; };
+		28EA713D1D8B7B4D00B7C5B1 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EA713C1D8B7B4D00B7C5B1 /* History.m */; };
 		7C37BD8936C0C8656EBE1C73 /* libPods-Visionary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A39E448A1EE1EAC5B642B652 /* libPods-Visionary.a */; };
 /* End PBXBuildFile section */
 
@@ -135,12 +135,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		002BDE741C9CAA97005E7868 /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
-		002BDE751C9CAA97005E7868 /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
+		002BDE741C9CAA97005E7868 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
+		002BDE751C9CAA97005E7868 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
 		002BDE771C9CAAD9005E7868 /* history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history.png; sourceTree = "<group>"; };
 		0051EE271C95B615001AFBB6 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
-		0051EE291C95BF4D001AFBB6 /* ScanItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanItem.h; sourceTree = "<group>"; };
-		0051EE2A1C95BF4D001AFBB6 /* ScanItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanItem.m; sourceTree = "<group>"; };
 		0051EE2D1C95E432001AFBB6 /* visionary-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "visionary-icon.png"; sourceTree = "<group>"; };
 		0051EE2F1C95EC5D001AFBB6 /* webicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = webicon.png; sourceTree = "<group>"; };
 		0051EE301C95EC5D001AFBB6 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
@@ -312,6 +310,8 @@
 		28D701C91D382E3E0022F6D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28D701D51D382E420022F6D5 /* VisionaryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VisionaryTests.m; sourceTree = "<group>"; };
 		28D701D71D382E420022F6D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28EA713B1D8B7B4D00B7C5B1 /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
+		28EA713C1D8B7B4D00B7C5B1 /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
 		A39E448A1EE1EAC5B642B652 /* libPods-Visionary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Visionary.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C936ADB6C2A7159B73587C3E /* Pods-Visionary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Visionary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Visionary/Pods-Visionary.debug.xcconfig"; sourceTree = "<group>"; };
 		E169526708A492BC794595FE /* Pods-Visionary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Visionary.release.xcconfig"; path = "Pods/Target Support Files/Pods-Visionary/Pods-Visionary.release.xcconfig"; sourceTree = "<group>"; };
@@ -331,15 +331,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0051EE2C1C95BF60001AFBB6 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				0051EE291C95BF4D001AFBB6 /* ScanItem.h */,
-				0051EE2A1C95BF4D001AFBB6 /* ScanItem.m */,
-			);
-			name = Data;
-			sourceTree = "<group>";
-		};
 		0051EE3C1C95F510001AFBB6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,6 +344,7 @@
 				283C018A1D35789E00CF4E76 /* PDFRender.m */,
 			);
 			name = Views;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		007351D61C9361D300660883 = {
@@ -380,7 +372,6 @@
 			isa = PBXGroup;
 			children = (
 				28AFA9001D2C3E42009F0057 /* Nibs */,
-				0051EE2C1C95BF60001AFBB6 /* Data */,
 				0094D1EB1C94CAC200A42DCE /* Resource */,
 				0094D1E71C94CAA900A42DCE /* Classes */,
 				00B1631F1C94F873008574FB /* Media */,
@@ -391,8 +382,7 @@
 		0094D1E71C94CAA900A42DCE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				0051EE3C1C95F510001AFBB6 /* Views */,
-				00F867531C970E8600868A70 /* QR Code */,
+				00F867531C970E8600868A70 /* Objects */,
 				282366241D2D6CD700AF5100 /* ViewControllers */,
 			);
 			name = Classes;
@@ -446,14 +436,18 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
-		00F867531C970E8600868A70 /* QR Code */ = {
+		00F867531C970E8600868A70 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				0051EE3C1C95F510001AFBB6 /* Views */,
+				28EA713B1D8B7B4D00B7C5B1 /* History.h */,
+				28EA713C1D8B7B4D00B7C5B1 /* History.m */,
 				00F867541C970E8600868A70 /* GenerateQR.h */,
 				00F867551C970E8600868A70 /* GenerateQR.m */,
 				00F867561C970E8600868A70 /* QRScanner.h */,
 				00F867571C970E8600868A70 /* QRScanner.m */,
 			);
+			name = Objects;
 			path = "QR Code";
 			sourceTree = "<group>";
 		};
@@ -466,8 +460,8 @@
 				009CC4331C949DF000E5E2CF /* PreferenceStore.m */,
 				00B1632E1C94FACB008574FB /* DetailViewController.h */,
 				281266E21D331DB100515292 /* DetailViewController.m */,
-				002BDE741C9CAA97005E7868 /* History.h */,
-				002BDE751C9CAA97005E7868 /* History.m */,
+				002BDE741C9CAA97005E7868 /* HistoryViewController.h */,
+				002BDE751C9CAA97005E7868 /* HistoryViewController.m */,
 				0051EE361C95F4F2001AFBB6 /* TextView.h */,
 				0051EE371C95F4F2001AFBB6 /* TextView.m */,
 			);
@@ -948,7 +942,7 @@
 				28404A531D8AC53500F426FD /* MDSnackbar.m in Sources */,
 				28306CC01D36D3A100725554 /* ReaderDocument.m in Sources */,
 				28306CBC1D36D3A100725554 /* ReaderConstants.m in Sources */,
-				002BDE761C9CAA97005E7868 /* History.m in Sources */,
+				002BDE761C9CAA97005E7868 /* HistoryViewController.m in Sources */,
 				00F8675C1C970E8600868A70 /* GenerateQR.m in Sources */,
 				0051EE381C95F4F2001AFBB6 /* TextView.m in Sources */,
 				28404A5B1D8AC53500F426FD /* MDLinearProgressLayer.m in Sources */,
@@ -956,8 +950,8 @@
 				0094D1EA1C94CABF00A42DCE /* PCAngularActivityIndicatorView.m in Sources */,
 				007351EA1C9361D300660883 /* ViewController.m in Sources */,
 				007351E71C9361D300660883 /* AppDelegate.m in Sources */,
+				28EA713D1D8B7B4D00B7C5B1 /* History.m in Sources */,
 				007351E41C9361D300660883 /* main.m in Sources */,
-				0051EE2B1C95BF4D001AFBB6 /* ScanItem.m in Sources */,
 				28404A571D8AC53500F426FD /* MDTableViewCell.m in Sources */,
 				28404A5D1D8AC53500F426FD /* MDSuggestPopupView.m in Sources */,
 				28404A541D8AC53500F426FD /* MDSwitch.m in Sources */,

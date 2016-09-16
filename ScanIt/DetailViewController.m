@@ -82,7 +82,7 @@
 
 #pragma mark - Google Cloud Vision API
 
-static NSString *const API_Key = @"AIzaSyCUCwQG6OgMc8CGn308Ak7mOVfSz4GCAew";
+static NSString *const API_Key = @"AIzaSyDOn9QRmm2mA3rG2KL7lV4EOLb0YCYC2YI";
 static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:annotate?key=";
 
 - (UIImage *) resizeImage:(UIImage*)image toSize:(CGSize)newSize {
@@ -254,7 +254,7 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
         }
 
     }
-    [self savetoHistoryWithString:self.resultArray];
+    [self savetoHistoryWithString];
 }
 
 -(void)LogoResultWithJson:(NSDictionary *)responseData{
@@ -352,16 +352,13 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
         constraint = 180;
     }
     dispatch_async(dispatch_get_main_queue(), ^{
+        
         [UIView animateWithDuration:1 animations:^{
             self.LabelConstraint.constant = constraint;
             [self.view layoutIfNeeded];
             
         }];
     });
-}
-
-- (IBAction)search:(id)sender {
-    
 }
 
 - (IBAction)webview:(id)sender {
@@ -386,15 +383,15 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     
 }
 
--(void)savetoHistoryWithString:(NSMutableArray *)result{
+-(void)savetoHistoryWithString{
     
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm beginWriteTransaction];
-    ScanItem *item = [[ScanItem alloc] init];
-    item.imageData = UIImageJPEGRepresentation(self.imageView.image, 0.7);
-    NSLog(@"image size %f", item.imageData.length/1024.0f/1024.0f);
-    item.result = [NSKeyedArchiver archivedDataWithRootObject:result];
-    [realm addObject:item];
+    History *history = [[History alloc] init];
+    history.imagePath = @"";
+    history.content = self.resultArray;
+    history.percentage = self.percentArray;
+    [realm addObject:history];
     [realm commitWriteTransaction];
 }
 

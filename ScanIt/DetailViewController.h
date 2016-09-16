@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "PCAngularActivityIndicatorView.h"
-#import "ScanItem.h"
 #import "WebPage.h"
 #import "TextView.h"
 #import "PreferenceStore.h"
 #import "ResultTableViewCell.h"
+#import "History.h"
 
 @import GoogleMobileAds;
 

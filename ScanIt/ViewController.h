@@ -9,9 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <Realm/Realm.h>
 #import "iOSUILib/MDButton.h"
-#import "ScanItem.h"
 #import "PCAngularActivityIndicatorView.h"
-#import "detailView.h"
+#import "DetailViewController.h"
 #import "PreferenceStore.h"
 #import "AAPLPreviewView.h"
 
@@ -23,6 +22,7 @@
     PCAngularActivityIndicatorView *ActivityIndicator;
     NSArray *array;
     UIImage *pickedImage;
+    UIImage *imagePath;
 }
 // For use in the storyboards.
 @property (nonatomic, weak) IBOutlet UIButton *cameraButton;
