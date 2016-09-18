@@ -175,6 +175,23 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
     
     pickedImage = info[UIImagePickerControllerOriginalImage];
     
+    imagePath = info[UIImagePickerControllerReferenceURL];
+    
+//    PHFetchResult <PHAsset *> *assets = [PHAsset fetchAssetsWithALAssetURLs:@[imagePath] options:nil];
+//    PHAsset *asset = [assets firstObject];
+//    PHImageManager *manager = [PHImageManager defaultManager];
+//    
+//    PHImageRequestOptions *requestOptions = [[PHImageRequestOptions alloc] init];
+//    requestOptions.resizeMode = PHImageRequestOptionsResizeModeExact;
+//    requestOptions.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+//    requestOptions.synchronous = true;
+//    
+//    [manager requestImageForAsset:asset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeDefault options:requestOptions resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+//        if (result) {
+//            NSLog(@"success");
+//        }
+//    }];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [picker dismissViewControllerAnimated:YES completion:NULL];
         [self performSegueWithIdentifier:@"ShowDetail" sender:nil];
@@ -191,10 +208,12 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
 - (IBAction)resumeInterruptedSession:(id)sender
 {
     dispatch_async( self.sessionQueue, ^{
+        
         // The session might fail to start running, e.g., if a phone or FaceTime call is still using audio or video.
         // A failure to start the session running will be communicated via a session runtime error notification.
         // To avoid repeatedly failing to start the session running, we only try to restart the session running in the
         // session runtime error handler if we aren't trying to resume the session running.
+        
         [self.session startRunning];
         self.sessionRunning = self.session.isRunning;
         if ( ! self.session.isRunning ) {
@@ -243,14 +262,30 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
                 // The sample buffer is not retained. Create image data before saving the still image to the photo library asynchronously.
                 NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
                 [PHPhotoLibrary requestAuthorization:^( PHAuthorizationStatus status ) {
+                    
                     // To preserve the metadata, we create an asset from the JPEG NSData representation.
                     // Note that creating an asset from a UIImage discards the metadata.
                     // In iOS 9, we can use -[PHAssetCreationRequest addResourceWithType:data:options].
+                    
+//                    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//                    NSString *documentsDirectory = [paths objectAtIndex:0];
+//                    
+//                    NSString *ImagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",@"cached"]];
+//                    
+//                    NSLog(@"pre writing to file");
+//                    if (![imageData writeToFile:ImagePath atomically:NO]){
+//                        NSLog(@"Failed to cache image data to disk");
+//                    }
+//                    else{
+//                        NSLog(@"the cachedImagedPath is %@",ImagePath);
+//                    }
+                    
                     if ( [PHAssetCreationRequest class] ) {
                         [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
                             [[PHAssetCreationRequest creationRequestForAsset] addResourceWithType:PHAssetResourceTypePhoto data:imageData options:nil];
                         } completionHandler:^( BOOL success, NSError *error ) {
-                            if (success ) {
+                            if (success) {
+                                
                                 pickedImage = [UIImage imageWithData:imageData];
                                 dispatch_async(dispatch_get_main_queue(), ^{
                                     [self performSegueWithIdentifier:@"ShowDetail" sender:nil];
@@ -435,6 +470,7 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
 }
 
 -(void)loadBeepSound{
+    
     // Get the path to the beep.mp3 file and convert it to a NSURL object.
     NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"beep" ofType:@"mp3"];
     NSURL *beepURL = [NSURL URLWithString:beepFilePath];
@@ -524,6 +560,7 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
         // Why not do all of this on the main queue?
         // Because -[AVCaptureSession startRunning] is a blocking call which can take a long time. We dispatch session setup to the sessionQueue
         // so that the main queue isn't blocked, which keeps the UI responsive.
+        
         dispatch_async( self.sessionQueue, ^{
             if ( self.setupResult != AVCamSetupResultSuccess ) {
                 return;
@@ -546,6 +583,7 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
                 self.videoDeviceInput = videoDeviceInput;
                 
                 dispatch_async( dispatch_get_main_queue(), ^{
+                    
                     // Why are we dispatching this to the main queue?
                     // Because AVCaptureVideoPreviewLayer is the backing layer for AAPLPreviewView and UIView
                     // can only be manipulated on the main thread.
@@ -554,6 +592,7 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
                     
                     // Use the status bar orientation as the initial video orientation. Subsequent orientation changes are handled by
                     // -[viewWillTransitionToSize:withTransitionCoordinator:].
+                    
                     UIInterfaceOrientation statusBarOrientation = [UIApplication sharedApplication].statusBarOrientation;
                     AVCaptureVideoOrientation initialVideoOrientation = AVCaptureVideoOrientationPortrait;
                     if ( statusBarOrientation != UIInterfaceOrientationUnknown ) {
@@ -764,7 +803,7 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
             [self removeObservers];
         }
     } );
-    
+//
     [super viewDidDisappear:animated];
 }
 
@@ -788,8 +827,8 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([[segue destinationViewController] isKindOfClass:[DetailView class]]) {
-        DetailView *destination =(DetailView *)segue.destinationViewController;
+    if ([[segue destinationViewController] isKindOfClass:[DetailViewController class]]) {
+        DetailViewController *destination =(DetailViewController *)segue.destinationViewController;
         destination.pickItem = self.ScanMode;
         destination.image = pickedImage;
     }
