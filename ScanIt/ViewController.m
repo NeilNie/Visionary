@@ -267,34 +267,34 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
                     // Note that creating an asset from a UIImage discards the metadata.
                     // In iOS 9, we can use -[PHAssetCreationRequest addResourceWithType:data:options].
                     
-                    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-                    NSString *documentsDirectory = [paths objectAtIndex:0];
-                    
-                    NSString *ImagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",@"cached"]];
-                    
-                    NSLog(@"pre writing to file");
-                    if (![imageData writeToFile:ImagePath atomically:NO]){
-                        NSLog(@"Failed to cache image data to disk");
-                    }
-                    else{
-                        NSLog(@"the cachedImagedPath is %@",ImagePath);
-                    }
-                    
-//                    if ( [PHAssetCreationRequest class] ) {
-//                        [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-//                            [[PHAssetCreationRequest creationRequestForAsset] addResourceWithType:PHAssetResourceTypePhoto data:imageData options:nil];
-//                        } completionHandler:^( BOOL success, NSError *error ) {
-//                            if (success) {
-//                                
-//                                pickedImage = [UIImage imageWithData:imageData];
-//                                dispatch_async(dispatch_get_main_queue(), ^{
-//                                    [self performSegueWithIdentifier:@"ShowDetail" sender:nil];
-//                                });
-//                            }else{
-//                                NSLog( @"Error occurred while saving image to photo library: %@", error );
-//                            }
-//                        }];
+//                    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//                    NSString *documentsDirectory = [paths objectAtIndex:0];
+//                    
+//                    NSString *ImagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",@"cached"]];
+//                    
+//                    NSLog(@"pre writing to file");
+//                    if (![imageData writeToFile:ImagePath atomically:NO]){
+//                        NSLog(@"Failed to cache image data to disk");
 //                    }
+//                    else{
+//                        NSLog(@"the cachedImagedPath is %@",ImagePath);
+//                    }
+                    
+                    if ( [PHAssetCreationRequest class] ) {
+                        [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+                            [[PHAssetCreationRequest creationRequestForAsset] addResourceWithType:PHAssetResourceTypePhoto data:imageData options:nil];
+                        } completionHandler:^( BOOL success, NSError *error ) {
+                            if (success) {
+                                
+                                pickedImage = [UIImage imageWithData:imageData];
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self performSegueWithIdentifier:@"ShowDetail" sender:nil];
+                                });
+                            }else{
+                                NSLog( @"Error occurred while saving image to photo library: %@", error );
+                            }
+                        }];
+                    }
                 }];
             }
             else {
@@ -791,20 +791,19 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
 
 -(void)viewDidAppear:(BOOL)animated{
     
-    //[self startRunningCamera];
+    [self startRunningCamera];
     [super viewDidAppear:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-#warning revert all the changes.
-//    dispatch_async( self.sessionQueue, ^{
-//        if ( self.setupResult == AVCamSetupResultSuccess ) {
-//            [self.session stopRunning];
-//            [self removeObservers];
-//        }
-//    } );
-//    
+    dispatch_async( self.sessionQueue, ^{
+        if ( self.setupResult == AVCamSetupResultSuccess ) {
+            [self.session stopRunning];
+            [self removeObservers];
+        }
+    } );
+//
     [super viewDidDisappear:animated];
 }
 
@@ -813,7 +812,7 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
     self.ScanMode = CVScanModeLabel;
     self.indicationLb.text = @"Content and Labels";
     [self setUpButtons];
-    //[self setUpCam];
+    [self setUpCam];
     self.previewView.frame = self.view.frame;
     [super viewDidLoad];
     // Do any additional setup after loading the view.

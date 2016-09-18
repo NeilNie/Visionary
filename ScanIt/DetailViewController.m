@@ -423,7 +423,12 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     self.resultArray = [NSMutableArray array];
     self.percentArray = [NSMutableArray array];
 
+    self.banner.adUnitID = @"ca-app-pub-7942613644553368/1563136736";
+    self.banner.rootViewController = self;
+    [self.banner loadRequest:[GADRequest request]];
+    
     [super viewDidLoad];
+
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -431,7 +436,6 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 #pragma mark - Navigation
  

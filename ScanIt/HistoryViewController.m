@@ -45,8 +45,8 @@
     static NSString *identifier = @"reuseID";
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     
-    UIImageView *image = (UIImageView *)[cell viewWithTag:1];
-    UILabel *text = (UILabel *)[cell viewWithTag:2];
+//    UIImageView *image = (UIImageView *)[cell viewWithTag:1];
+//    UILabel *text = (UILabel *)[cell viewWithTag:2];
     
 //    History *item = [allItems objectAtIndex:indexPath.row];
 //    image.image = [UIImage imageWithData:item.imageData];

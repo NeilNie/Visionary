@@ -35,5 +35,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIButton *OpenFile;
 @property (weak, nonatomic) IBOutlet UIButton *WebView;
+@property (weak, nonatomic) IBOutlet GADBannerView *banner;
 
 @end
