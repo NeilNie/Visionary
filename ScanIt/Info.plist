@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.0</string>
+	<string>1.0.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -39,6 +39,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>We need to access this informatino. </string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>We need to access your calendar information. </string>
 	<key>NSCameraUsageDescription</key>
 	<string>We have to use your camera</string>
 	<key>NSMicrophoneUsageDescription</key>

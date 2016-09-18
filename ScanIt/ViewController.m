@@ -267,19 +267,6 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
                     // Note that creating an asset from a UIImage discards the metadata.
                     // In iOS 9, we can use -[PHAssetCreationRequest addResourceWithType:data:options].
                     
-//                    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//                    NSString *documentsDirectory = [paths objectAtIndex:0];
-//                    
-//                    NSString *ImagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",@"cached"]];
-//                    
-//                    NSLog(@"pre writing to file");
-//                    if (![imageData writeToFile:ImagePath atomically:NO]){
-//                        NSLog(@"Failed to cache image data to disk");
-//                    }
-//                    else{
-//                        NSLog(@"the cachedImagedPath is %@",ImagePath);
-//                    }
-                    
                     if ( [PHAssetCreationRequest class] ) {
                         [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
                             [[PHAssetCreationRequest creationRequestForAsset] addResourceWithType:PHAssetResourceTypePhoto data:imageData options:nil];
@@ -835,3 +822,19 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
 }
 
 @end
+
+
+//snippet
+
+//                    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//                    NSString *documentsDirectory = [paths objectAtIndex:0];
+//
+//                    NSString *ImagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",@"cached"]];
+//
+//                    NSLog(@"pre writing to file");
+//                    if (![imageData writeToFile:ImagePath atomically:NO]){
+//                        NSLog(@"Failed to cache image data to disk");
+//                    }
+//                    else{
+//                        NSLog(@"the cachedImagedPath is %@",ImagePath);
+//                    }
