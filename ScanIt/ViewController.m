@@ -778,7 +778,7 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
 
 -(void)viewDidAppear:(BOOL)animated{
     
-    [self startRunningCamera];
+    //[self startRunningCamera];
     [super viewDidAppear:YES];
 }
 
@@ -799,7 +799,7 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
     self.ScanMode = CVScanModeLabel;
     self.indicationLb.text = @"Content and Labels";
     [self setUpButtons];
-    [self setUpCam];
+    //[self setUpCam];
     self.previewView.frame = self.view.frame;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
