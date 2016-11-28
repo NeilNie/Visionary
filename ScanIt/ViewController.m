@@ -767,18 +767,12 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
         }
     }
 }
--(void)rotationCompleted:(id)sender{
-    
-    if (self.btMore == sender){
-        //NSLog(@"btShare rotationCompleted %s", self.btMore.isRotated?"rotated":"normal");
-    }
-}
 
 #pragma mark - Life Cycle
 
 -(void)viewDidAppear:(BOOL)animated{
     
-    //[self startRunningCamera];
+    [self startRunningCamera];
     [super viewDidAppear:YES];
 }
 
@@ -790,7 +784,6 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
             [self removeObservers];
         }
     } );
-//
     [super viewDidDisappear:animated];
 }
 
@@ -799,10 +792,9 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
     self.ScanMode = CVScanModeLabel;
     self.indicationLb.text = @"Content and Labels";
     [self setUpButtons];
-    //[self setUpCam];
+    [self setUpCam];
     self.previewView.frame = self.view.frame;
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {

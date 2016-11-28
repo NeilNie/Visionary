@@ -10,7 +10,7 @@
 #import "PCAngularActivityIndicatorView.h"
 #import "WebPage.h"
 #import "TextView.h"
-#import "PreferenceStore.h"
+#import "PreferenceViewController.h"
 #import "ResultTableViewCell.h"
 #import "History.h"
 

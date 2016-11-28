@@ -11,7 +11,7 @@
 #import "iOSUILib/MDButton.h"
 #import "PCAngularActivityIndicatorView.h"
 #import "DetailViewController.h"
-#import "PreferenceStore.h"
+#import "PreferenceViewController.h"
 #import "AAPLPreviewView.h"
 
 @import GoogleMobileAds;

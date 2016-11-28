@@ -18,7 +18,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return allItems.count;
+    return history.count;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -84,7 +84,7 @@
     }else{
         self.banner.hidden = YES;
     }
-    allItems = [History allObjects];
+    //allItems = [History allObjects];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }

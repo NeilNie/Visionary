@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <Realm/Realm.h>
 #import "History.h"
-#import "PreferenceStore.h"
+#import "PreferenceViewController.h"
 
 @import GoogleMobileAds;
 
 @interface HistoryViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource> {
-    RLMResults *allItems;
+    RLMResults *history;
 }
 @property (weak, nonatomic) IBOutlet GADBannerView *banner;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;

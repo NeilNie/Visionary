@@ -23,7 +23,7 @@
 		007351EF1C9361D300660883 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 007351EE1C9361D300660883 /* Assets.xcassets */; };
 		007351F21C9361D300660883 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 007351F01C9361D300660883 /* LaunchScreen.storyboard */; };
 		0094D1EA1C94CABF00A42DCE /* PCAngularActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0094D1E91C94CABF00A42DCE /* PCAngularActivityIndicatorView.m */; };
-		009CC4341C949DF000E5E2CF /* PreferenceStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 009CC4331C949DF000E5E2CF /* PreferenceStore.m */; };
+		009CC4341C949DF000E5E2CF /* PreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009CC4331C949DF000E5E2CF /* PreferenceViewController.m */; };
 		00B163291C94F873008574FB /* QR_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 00B163231C94F873008574FB /* QR_icon.png */; };
 		00B1632A1C94F873008574FB /* search-256x256.png in Resources */ = {isa = PBXBuildFile; fileRef = 00B163241C94F873008574FB /* search-256x256.png */; };
 		00C2E7481C9610B6004F2B22 /* WebPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C2E7471C9610B6004F2B22 /* WebPage.m */; };
@@ -158,8 +158,8 @@
 		007351F31C9361D300660883 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0094D1E81C94CABF00A42DCE /* PCAngularActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCAngularActivityIndicatorView.h; sourceTree = "<group>"; };
 		0094D1E91C94CABF00A42DCE /* PCAngularActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCAngularActivityIndicatorView.m; sourceTree = "<group>"; };
-		009CC4321C949DF000E5E2CF /* PreferenceStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferenceStore.h; sourceTree = "<group>"; };
-		009CC4331C949DF000E5E2CF /* PreferenceStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferenceStore.m; sourceTree = "<group>"; };
+		009CC4321C949DF000E5E2CF /* PreferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferenceViewController.h; sourceTree = "<group>"; };
+		009CC4331C949DF000E5E2CF /* PreferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferenceViewController.m; sourceTree = "<group>"; };
 		00B163231C94F873008574FB /* QR_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QR_icon.png; sourceTree = "<group>"; };
 		00B163241C94F873008574FB /* search-256x256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search-256x256.png"; sourceTree = "<group>"; };
 		00B1632E1C94FACB008574FB /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
@@ -456,8 +456,8 @@
 			children = (
 				007351E81C9361D300660883 /* ViewController.h */,
 				007351E91C9361D300660883 /* ViewController.m */,
-				009CC4321C949DF000E5E2CF /* PreferenceStore.h */,
-				009CC4331C949DF000E5E2CF /* PreferenceStore.m */,
+				009CC4321C949DF000E5E2CF /* PreferenceViewController.h */,
+				009CC4331C949DF000E5E2CF /* PreferenceViewController.m */,
 				00B1632E1C94FACB008574FB /* DetailViewController.h */,
 				281266E21D331DB100515292 /* DetailViewController.m */,
 				002BDE741C9CAA97005E7868 /* HistoryViewController.h */,
@@ -920,7 +920,7 @@
 				28306CC41D36D3A100725554 /* ReaderThumbCache.m in Sources */,
 				28306CCD1D36D3A100725554 /* ThumbsViewController.m in Sources */,
 				28306CCB1D36D3A100725554 /* ReaderViewController.m in Sources */,
-				009CC4341C949DF000E5E2CF /* PreferenceStore.m in Sources */,
+				009CC4341C949DF000E5E2CF /* PreferenceViewController.m in Sources */,
 				28306CC31D36D3A100725554 /* ReaderMainToolbar.m in Sources */,
 				28306CBE1D36D3A100725554 /* ReaderContentTile.m in Sources */,
 				28306CC71D36D3A100725554 /* ReaderThumbRender.m in Sources */,

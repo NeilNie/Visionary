@@ -252,7 +252,7 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
             NSString *emotionPercentString = [NSString stringWithFormat:@"%@: %@", emotion, percentString];
             [self.resultArray addObject:emotionPercentString];
         }
-
+        
     }
     [self savetoHistoryWithString];
 }
@@ -284,7 +284,7 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     NSInteger numLabels = [labelAnnotations count];
     
     if (numLabels > 0) {
-
+        
         for (NSDictionary *label in labelAnnotations) {
             NSString *labelString = [label objectForKey:@"description"];
             NSString *number = [label objectForKey:@"score"];
@@ -324,7 +324,7 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
         [self.resultArray addObject:@"Sorry, no result found"];
     }
     //[self savetoHistoryWithString:self.resultArray];
-
+    
 }
 -(void)TextResultWithJson:(NSDictionary *)responseData{
     
@@ -402,7 +402,7 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     ActivityIndicator.center = self.view.center;
     [self.view addSubview:ActivityIndicator];
     [ActivityIndicator startAnimating];
-
+    
 }
 
 #pragma mark - Life Cycle
@@ -422,13 +422,13 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     [self createRequest:binaryImageData];
     self.resultArray = [NSMutableArray array];
     self.percentArray = [NSMutableArray array];
-
+    
     self.banner.adUnitID = @"ca-app-pub-7942613644553368/1563136736";
     self.banner.rootViewController = self;
     [self.banner loadRequest:[GADRequest request]];
     
     [super viewDidLoad];
-
+    
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -438,8 +438,8 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
 }
 
 #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([[segue destinationViewController] isKindOfClass:[WebPage class]]) {

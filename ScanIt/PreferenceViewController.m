@@ -6,15 +6,42 @@
 //  Copyright © 2016 Yongyang Nie. All rights reserved.
 //
 
-#import "PreferenceStore.h"
+#import "PreferenceViewController.h"
 
 #define kRemoveAdsProductIdentifier1 @"noads.visionary.com"
 
-@interface PreferenceStore ()
+@interface PreferenceViewController ()
 
 @end
 
-@implementation PreferenceStore
+@implementation PreferenceViewController
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSURL *url = [NSURL URLWithString:[[self.apps objectAtIndex:indexPath.row] objectForKey:@"link"]];
+    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.apps.count;
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 65;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"idTableCell" forIndexPath:indexPath];
+    cell.textLabel.text = [[self.apps objectAtIndex:indexPath.row] objectForKey:@"title"];
+    cell.detailTextLabel.text = [[self.apps objectAtIndex:indexPath.row] objectForKey:@"description"];
+    return cell;
+}
+
+#pragma mark - IBActions
 
 - (IBAction)tapsRemoveAds{
     NSLog(@"User requests to remove ads");
@@ -25,13 +52,30 @@
         SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:kRemoveAdsProductIdentifier1]];
         productsRequest.delegate = self;
         [productsRequest start];
-        
     }
     else{
         NSLog(@"User cannot make payments due to parental controls");
         //this is called the user cannot make payments, most likely due to parental controls
     }
 }
+
+- (IBAction) restore{
+    
+    //this is called when the user restores purchases, you should hook this up to a button
+    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+    [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+    areAdsRemoved = NO;
+    [[NSUserDefaults standardUserDefaults] setBool:areAdsRemoved forKey:@"areAdsRemoved"];
+    //use NSUserDefaults so that you can load wether or not they bought it
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
+- (IBAction)switchStorage:(id)sender{
+    
+}
+
+#pragma mark - IAP Store
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response{
     
@@ -53,17 +97,6 @@
     
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
     [[SKPaymentQueue defaultQueue] addPayment:payment];
-}
-
-- (IBAction) restore{
-
-    //this is called when the user restores purchases, you should hook this up to a button
-    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-    [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
-    areAdsRemoved = NO;
-    [[NSUserDefaults standardUserDefaults] setBool:areAdsRemoved forKey:@"areAdsRemoved"];
-    //use NSUserDefaults so that you can load wether or not they bought it
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void) paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
@@ -137,6 +170,24 @@
     
     areAdsRemoved = [[NSUserDefaults standardUserDefaults] boolForKey:@"areAdsRemoved"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    self.apps = [[NSMutableArray alloc] initWithObjects:
+                 @{@"title": @"Track Your Run",
+                   @"description": @"A smart and personalized run keeper.",
+                   @"link": @"https://itunes.apple.com/us/app/track-your-runs/id1086408057?mt=8"},
+                 
+                 @{@"title": @"Done!",
+                   @"description": @"Smart task manager that understands you and help you to schedule your day.",
+                   @"link": @"https://itunes.apple.com/us/app/done!-todo-list/id1107140801?mt=8"},
+                 
+                 @{@"title": @"Toolbox",
+                   @"description": @"Calculator, timer, compass and more. Now it supports voice recognition",
+                   @"link": @"https://itunes.apple.com/us/app/the-toolbox/id992505214?mt=8"},
+                 
+                 @{@"title": @"Bounce Up!",
+                   @"description": @"A simple elegant game. ",
+                   @"link": @"https://itunes.apple.com/us/app/bounce-up!-how-high-can-you/id1033632885?mt=8`"},
+                 nil];
     
     [super viewDidLoad];
     // Do any additional setup after loading the view.
