@@ -1,4 +1,7 @@
 # Visionary
+
+[![Build Status](https://travis-ci.org/NeilNie/Visionary.svg?branch=master)](https://travis-ci.org/NeilNie/Visionary)
+
 Visionary intergrates the powerful Google Cloud Vision API into a simple iOS app. The app scans an image gives you feedbacks about the content. The app also support OCR and QR scanning. 
 
 ##About Google Cloud Vision
@@ -6,7 +9,7 @@ Visionary intergrates the powerful Google Cloud Vision API into a simple iOS app
 
 ##Details about Visionary:
 
-![screen_shot_1](https://github.com/NeilNie/Visionary/blob/master/0x0ss-1.jpg)
+![screen_shot_1](https://github.com/NeilNie/Visionary/blob/master/0x0ss.jpg)
 ![screen_shot_2](https://github.com/NeilNie/Visionary/blob/master/0x0ss-3.jpg)
 ![screen_shot_3](https://github.com/NeilNie/Visionary/blob/master/0x0ss-2.jpg)
 

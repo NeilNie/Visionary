@@ -204,7 +204,6 @@
 		7B81EE16CEA2CE1A247143E069927F2E /* Pods-Visionary-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Visionary-resources.sh"; sourceTree = "<group>"; };
 		7BCE6196083C75AA6B2576918EEEF254 /* RLMSchema.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = RLMSchema.mm; path = Realm/RLMSchema.mm; sourceTree = "<group>"; };
 		7C3561A73B52229A142BEA66D2B2EEB0 /* GoogleToolboxForMac-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GoogleToolboxForMac-dummy.m"; sourceTree = "<group>"; };
-		7D25248E758E8E6E0D80DF449626E28F /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = Frameworks/GoogleMobileAds.framework; sourceTree = "<group>"; };
 		7DAD63355AFDC64E2D784A4B3D41A22A /* Pods-Visionary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Visionary.release.xcconfig"; sourceTree = "<group>"; };
 		7E2FEDA000B357E7081ED86BE1921BDA /* RLMRealm_Dynamic.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMRealm_Dynamic.h; path = include/RLMRealm_Dynamic.h; sourceTree = "<group>"; };
 		8216E2A49A1E2A9E7DECA05177EC24C1 /* transact_log_handler.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = transact_log_handler.cpp; path = Realm/ObjectStore/src/impl/transact_log_handler.cpp; sourceTree = "<group>"; };
@@ -235,6 +234,7 @@
 		A9D28A048E22158C7F119AA2FE1257A0 /* RLMSyncPermissionChange.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RLMSyncPermissionChange.m; path = Realm/RLMSyncPermissionChange.m; sourceTree = "<group>"; };
 		AA758DD6CADD8F5A3570AD2E2DD16C7F /* RLMProperty.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMProperty.h; path = include/RLMProperty.h; sourceTree = "<group>"; };
 		AF185CC8F41B71619D94E8DAA232DE66 /* RLMSyncCredentials.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMSyncCredentials.h; path = include/RLMSyncCredentials.h; sourceTree = "<group>"; };
+		AF77577341A64E1C71881916895368FF /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = Frameworks/frameworks/GoogleMobileAds.framework; sourceTree = "<group>"; };
 		B29AE559CA9A2FE5CF8617C013CF3AA9 /* RLMOptionalBase.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = RLMOptionalBase.mm; path = Realm/RLMOptionalBase.mm; sourceTree = "<group>"; };
 		B3DACAD8436F297A5D9463195BAF5FC4 /* handover.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = handover.cpp; path = Realm/ObjectStore/src/impl/handover.cpp; sourceTree = "<group>"; };
 		B3E76508118CFAA0D3D783CB8AE18F5A /* RLMRealmConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMRealmConfiguration.h; path = include/RLMRealmConfiguration.h; sourceTree = "<group>"; };
@@ -443,14 +443,6 @@
 			path = Realm;
 			sourceTree = "<group>";
 		};
-		4AFD0C932E8043EE4BCB58E011DDDF26 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7D25248E758E8E6E0D80DF449626E28F /* GoogleMobileAds.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		4D325A57CC6E88D09B2B7130D8C7EDE2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -590,6 +582,14 @@
 			path = "Target Support Files/Pods-Visionary";
 			sourceTree = "<group>";
 		};
+		91D53BAAFCA10B0617C3ED97B63CFC2F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AF77577341A64E1C71881916895368FF /* GoogleMobileAds.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		956D775B8593DE4878264177D74B20B2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -686,7 +686,7 @@
 		EB10A3BE89C544C33FAB63926FD76AEE /* Google-Mobile-Ads-SDK */ = {
 			isa = PBXGroup;
 			children = (
-				4AFD0C932E8043EE4BCB58E011DDDF26 /* Frameworks */,
+				91D53BAAFCA10B0617C3ED97B63CFC2F /* Frameworks */,
 			);
 			name = "Google-Mobile-Ads-SDK";
 			path = "Google-Mobile-Ads-SDK";
