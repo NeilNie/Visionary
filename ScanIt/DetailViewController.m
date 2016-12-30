@@ -402,7 +402,6 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     ActivityIndicator.center = self.view.center;
     [self.view addSubview:ActivityIndicator];
     [ActivityIndicator startAnimating];
-    
 }
 
 #pragma mark - Life Cycle

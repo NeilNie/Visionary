@@ -306,10 +306,6 @@
 		28B3DDCE1D31E76C007CDC90 /* close_sign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close_sign.png; sourceTree = "<group>"; };
 		28B3DDD01D31E889007CDC90 /* photo_album.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo_album.png; sourceTree = "<group>"; };
 		28C3E4191D2C48B5008D9A98 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		28D701C71D382E3E0022F6D5 /* VisionaryUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VisionaryUITests.m; sourceTree = "<group>"; };
-		28D701C91D382E3E0022F6D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		28D701D51D382E420022F6D5 /* VisionaryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VisionaryTests.m; sourceTree = "<group>"; };
-		28D701D71D382E420022F6D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28EA713B1D8B7B4D00B7C5B1 /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
 		28EA713C1D8B7B4D00B7C5B1 /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
 		A39E448A1EE1EAC5B642B652 /* libPods-Visionary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Visionary.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -334,6 +330,8 @@
 		0051EE3C1C95F510001AFBB6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0094D1E81C94CABF00A42DCE /* PCAngularActivityIndicatorView.h */,
+				0094D1E91C94CABF00A42DCE /* PCAngularActivityIndicatorView.m */,
 				282366211D2D6CD200AF5100 /* AAPLPreviewView.h */,
 				282366221D2D6CD200AF5100 /* AAPLPreviewView.m */,
 				00C2E7461C9610B6004F2B22 /* WebPage.h */,
@@ -352,8 +350,6 @@
 			children = (
 				28549A951D46D92E00326D9E /* Visionary.entitlements */,
 				007351E11C9361D300660883 /* ScanIt */,
-				28D701C61D382E3E0022F6D5 /* VisionaryUITests */,
-				28D701D41D382E420022F6D5 /* VisionaryTests */,
 				007351E01C9361D300660883 /* Products */,
 				CEC570C82910FEB966EBFC73 /* Frameworks */,
 				7624A0BDE656D123F390A73C /* Pods */,
@@ -398,8 +394,6 @@
 				007351E61C9361D300660883 /* AppDelegate.m */,
 				007351F31C9361D300660883 /* Info.plist */,
 				007351E31C9361D300660883 /* main.m */,
-				0094D1E81C94CABF00A42DCE /* PCAngularActivityIndicatorView.h */,
-				0094D1E91C94CABF00A42DCE /* PCAngularActivityIndicatorView.m */,
 			);
 			name = Resource;
 			sourceTree = "<group>";
@@ -640,24 +634,6 @@
 				28912B711D333BA300B06F07 /* ResultTableViewCell.xib */,
 			);
 			name = Nibs;
-			sourceTree = "<group>";
-		};
-		28D701C61D382E3E0022F6D5 /* VisionaryUITests */ = {
-			isa = PBXGroup;
-			children = (
-				28D701C71D382E3E0022F6D5 /* VisionaryUITests.m */,
-				28D701C91D382E3E0022F6D5 /* Info.plist */,
-			);
-			path = VisionaryUITests;
-			sourceTree = "<group>";
-		};
-		28D701D41D382E420022F6D5 /* VisionaryTests */ = {
-			isa = PBXGroup;
-			children = (
-				28D701D51D382E420022F6D5 /* VisionaryTests.m */,
-				28D701D71D382E420022F6D5 /* Info.plist */,
-			);
-			path = VisionaryTests;
 			sourceTree = "<group>";
 		};
 		7624A0BDE656D123F390A73C /* Pods */ = {
