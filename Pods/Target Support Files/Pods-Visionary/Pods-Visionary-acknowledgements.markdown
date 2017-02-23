@@ -7,31 +7,23 @@ Copyright 2017 Google
 
 ## FirebaseAnalytics
 
-Copyright 2016 Google
+Copyright 2017 Google
 
 ## FirebaseCore
 
-Copyright 2016 Google
+Copyright 2017 Google
 
 ## FirebaseDatabase
 
-Copyright 2016 Google
+Copyright 2017 Google
 
 ## FirebaseInstanceID
 
-Copyright 2016 Google
+Copyright 2017 Google
 
 ## Google-Mobile-Ads-SDK
 
 Copyright 2017 Google
-
-## GoogleInterchangeUtilities
-
-Copyright 2016 Google
-
-## GoogleSymbolUtilities
-
-Copyright 2016 Google
 
 ## GoogleToolboxForMac
 
