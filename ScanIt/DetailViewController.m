@@ -82,7 +82,7 @@
 
 #pragma mark - Google Cloud Vision API
 
-static NSString *const API_Key = @"AIzaSyDOn9QRmm2mA3rG2KL7lV4EOLb0YCYC2YI";
+static NSString *const API_Key = @"AIzaSyDUh7MvcL1qz4KCEB56lMkLdgVsW6TQN0U";
 static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:annotate?key=";
 
 - (UIImage *) resizeImage:(UIImage*)image toSize:(CGSize)newSize {
@@ -177,7 +177,6 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
     dispatch_async(dispatch_get_main_queue(), ^{
         [ActivityIndicator removeFromSuperview];
     });
-    
     
     // Check for errors
     if (errorObj) {
