@@ -28,9 +28,9 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
-  - Realm (2.8.3):
-    - Realm/Headers (= 2.8.3)
-  - Realm/Headers (2.8.3)
+  - Realm (2.9.0):
+    - Realm/Headers (= 2.9.0)
+  - Realm/Headers (2.9.0)
 
 DEPENDENCIES:
   - Firebase/AdMob
@@ -45,9 +45,9 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
   Google-Mobile-Ads-SDK: 4a6f1b43c8cc0e1e95a3b59d9f52a01671c6f9f3
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  nanopb: 22bc080fa3955e2116b6ff3ee6c2cb3c15ab97cb
-  Realm: 3601ef091c8c499a31101d8563b991e75546cdce
+  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  Realm: f14ab1673502559cb16592ddb8f383c474c13e05
 
 PODFILE CHECKSUM: f4bd7b89c19e4779794030bdc257ba75ba107880
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1
