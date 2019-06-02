@@ -683,7 +683,7 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
     self.btText.alpha = 0.f;
     self.btLabel.alpha = 0.f;
     
-    _startPoint = CGPointMake(self.btMore.center.x - 18, self.btMore.center.y - 100);
+    _startPoint = CGPointMake(self.btMore.center.x - 10, self.btMore.center.y - 50);
     self.btQR.center = _startPoint;
     self.btLabel.center = _startPoint;
     self.btText.center = _startPoint;

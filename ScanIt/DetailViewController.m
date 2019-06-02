@@ -82,7 +82,7 @@
 
 #pragma mark - Google Cloud Vision API
 
-static NSString *const API_Key = @"AIzaSyDUh7MvcL1qz4KCEB56lMkLdgVsW6TQN0U";
+static NSString *const API_Key = @"AIzaSyBzEzybe6NX_Q29ISFSQuxAirOLzO91ZKA";
 static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:annotate?key=";
 
 - (UIImage *) resizeImage:(UIImage*)image toSize:(CGSize)newSize {
@@ -166,48 +166,57 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
 
 - (void)analyzeResults: (NSData*)dataToParse {
     
-    // Update UI on the main thread
-    NSError *e = nil;
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:dataToParse options:kNilOptions error:&e];
-    NSArray *responses = [json objectForKey:@"responses"];
-    NSDictionary *responseData = [responses objectAtIndex: 0];
-    NSDictionary *errorObj = [json objectForKey:@"error"];
-    NSLog(@"%@", responses);
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [ActivityIndicator removeFromSuperview];
-    });
-    
-    // Check for errors
-    if (errorObj) {
+    if (dataToParse) {
+        // Update UI on the main thread
+        NSError *e = nil;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:dataToParse options:kNilOptions error:&e];
+        NSArray *responses = [json objectForKey:@"responses"];
+        NSDictionary *responseData = [responses objectAtIndex: 0];
+        NSDictionary *errorObj = [json objectForKey:@"error"];
+        NSLog(@"%@", responses);
         
-        NSString *errorString1 = @"Error code ";
-        NSString *errorCode = [errorObj[@"code"] stringValue];
-        NSString *errorString2 = @": ";
-        NSString *errorMsg = errorObj[@"message"];
-        NSLog(@"%@%@%@%@", errorString1, errorCode, errorString2, errorMsg);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self->ActivityIndicator removeFromSuperview];
+        });
         
+        // Check for errors
+        if (errorObj) {
+            
+            NSString *errorString1 = @"Error code ";
+            NSString *errorCode = [errorObj[@"code"] stringValue];
+            NSString *errorString2 = @": ";
+            NSString *errorMsg = errorObj[@"message"];
+            NSLog(@"%@%@%@%@", errorString1, errorCode, errorString2, errorMsg);
+            
+        } else {
+            
+            switch (self.pickItem) {
+                case 0:
+                    [self FaceResultWithJson:responseData];
+                    [self.ResultTable reloadData];
+                    [self showLabel];
+                    
+                    break;
+                case 1:
+                    [self LabelResultWithJson:responseData];
+                    [self.ResultTable reloadData];
+                    [self showLabel];
+                    break;
+                case 2:
+                    [self TextResultWithJson:responseData];
+                    [self.ResultTable reloadData];
+                    break;
+                default:
+                    break;
+            }
+        }
     } else {
         
-        switch (self.pickItem) {
-            case 0:
-                [self FaceResultWithJson:responseData];
-                [self.ResultTable reloadData];
-                [self showLabel];
-                
-                break;
-            case 1:
-                [self LabelResultWithJson:responseData];
-                [self.ResultTable reloadData];
-                [self showLabel];
-                break;
-            case 2:
-                [self TextResultWithJson:responseData];
-                [self.ResultTable reloadData];
-                break;
-            default:
-                break;
-        }
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Opps, something went wrong." message:@"Sorry about this. Please try again later." preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
@@ -292,7 +301,9 @@ static NSString *const Google_URL = @"https://vision.googleapis.com/v1/images:an
             [self.percentArray addObject:percent];
         }
         isWeb = YES;
-        self.WebView.enabled = YES;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.WebView.enabled = YES;
+        });
         
     } else {
         [self.resultArray addObject:@"Sorry, no result found"];

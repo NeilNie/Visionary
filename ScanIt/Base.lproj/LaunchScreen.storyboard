@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11163.2" systemVersion="16A239j" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" generatesPrototypingConstraints="YES" useTraitCollections="YES" colorMatched="NO" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <development version="7000" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11133"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -15,18 +18,18 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="visionary-icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="DvQ-Ms-Jpe">
-                                <rect key="frame" x="151" y="151" width="298" height="298"/>
+                                <rect key="frame" x="58" y="299" width="298" height="298"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="298" id="WPy-Ia-BEr"/>
                                     <constraint firstAttribute="height" constant="298" id="fxm-LV-pdC"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="DvQ-Ms-Jpe" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="4YY-Mt-ZgN"/>
                             <constraint firstItem="DvQ-Ms-Jpe" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="r3s-aF-TIh"/>
@@ -39,6 +42,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="visionary-icon.png" width="1024" height="1024"/>
+        <image name="visionary-icon.png" width="368.6400146484375" height="368.6400146484375"/>
     </resources>
 </document>
