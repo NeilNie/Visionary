@@ -177,21 +177,6 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
     
     imagePath = info[UIImagePickerControllerReferenceURL];
     
-//    PHFetchResult <PHAsset *> *assets = [PHAsset fetchAssetsWithALAssetURLs:@[imagePath] options:nil];
-//    PHAsset *asset = [assets firstObject];
-//    PHImageManager *manager = [PHImageManager defaultManager];
-//    
-//    PHImageRequestOptions *requestOptions = [[PHImageRequestOptions alloc] init];
-//    requestOptions.resizeMode = PHImageRequestOptionsResizeModeExact;
-//    requestOptions.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
-//    requestOptions.synchronous = true;
-//    
-//    [manager requestImageForAsset:asset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeDefault options:requestOptions resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-//        if (result) {
-//            NSLog(@"success");
-//        }
-//    }];
-    
     dispatch_async(dispatch_get_main_queue(), ^{
         [picker dismissViewControllerAnimated:YES completion:NULL];
         [self performSegueWithIdentifier:@"ShowDetail" sender:nil];
@@ -244,8 +229,8 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
     });
 }
 
-- (IBAction)snapStillImage:(id)sender
-{
+- (IBAction)snapStillImage:(id)sender{
+    
     dispatch_async( self.sessionQueue, ^{
         AVCaptureConnection *connection = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
         AVCaptureVideoPreviewLayer *previewLayer = (AVCaptureVideoPreviewLayer *)self.previewView.layer;
@@ -273,7 +258,7 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
                         } completionHandler:^( BOOL success, NSError *error ) {
                             if (success) {
                                 
-                                pickedImage = [UIImage imageWithData:imageData];
+                                self->pickedImage = [UIImage imageWithData:imageData];
                                 dispatch_async(dispatch_get_main_queue(), ^{
                                     [self performSegueWithIdentifier:@"ShowDetail" sender:nil];
                                 });
@@ -291,8 +276,8 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
     } );
 }
 
-- (IBAction)changeCamera:(id)sender
-{
+- (IBAction)changeCamera:(id)sender{
+    
     self.cameraButton.enabled = NO;
     self.stillButton.enabled = NO;
     
@@ -365,8 +350,8 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
 
 #pragma mark - Device Configuration
 
-- (void)focusWithMode:(AVCaptureFocusMode)focusMode exposeWithMode:(AVCaptureExposureMode)exposureMode atDevicePoint:(CGPoint)point monitorSubjectAreaChange:(BOOL)monitorSubjectAreaChange
-{
+- (void)focusWithMode:(AVCaptureFocusMode)focusMode exposeWithMode:(AVCaptureExposureMode)exposureMode atDevicePoint:(CGPoint)point monitorSubjectAreaChange:(BOOL)monitorSubjectAreaChange{
+    
     dispatch_async( self.sessionQueue, ^{
         AVCaptureDevice *device = self.videoDeviceInput.device;
         NSError *error = nil;
@@ -392,8 +377,8 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
     } );
 }
 
-+ (void)setFlashMode:(AVCaptureFlashMode)flashMode forDevice:(AVCaptureDevice *)device
-{
++ (void)setFlashMode:(AVCaptureFlashMode)flashMode forDevice:(AVCaptureDevice *)device{
+    
     if ( device.hasFlash && [device isFlashModeSupported:flashMode] ) {
         NSError *error = nil;
         if ( [device lockForConfiguration:&error] ) {
@@ -406,8 +391,8 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
     }
 }
 
-+ (AVCaptureDevice *)deviceWithMediaType:(NSString *)mediaType preferringPosition:(AVCaptureDevicePosition)position
-{
++ (AVCaptureDevice *)deviceWithMediaType:(NSString *)mediaType preferringPosition:(AVCaptureDevicePosition)position{
+    
     NSArray *devices = [AVCaptureDevice devicesWithMediaType:mediaType];
     AVCaptureDevice *captureDevice = devices.firstObject;
     
@@ -454,27 +439,6 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
             [self removeObservers];
         }
     } );
-}
-
--(void)loadBeepSound{
-    
-    // Get the path to the beep.mp3 file and convert it to a NSURL object.
-    NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"beep" ofType:@"mp3"];
-    NSURL *beepURL = [NSURL URLWithString:beepFilePath];
-    
-    NSError *error;
-    
-    // Initialize the audio player object using the NSURL object previously set.
-    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:beepURL error:&error];
-    if (error) {
-        // If the audio player cannot be initialized then log a message.
-        NSLog(@"Could not play beep file.");
-        NSLog(@"%@", [error localizedDescription]);
-    }
-    else{
-        // If the audio player was successfully initialized then load it in memory.
-        [_audioPlayer prepareToPlay];
-    }
 }
 
 -(void)setUpCam{
@@ -539,7 +503,7 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
         
         // Start video capture.
         [self.session commitConfiguration];
-
+        
     }else{
         
         // Setup the capture session.
@@ -668,7 +632,7 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
             }
         }
     } );
-
+    
 }
 
 #pragma mark - MDButton
@@ -683,11 +647,11 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
     self.btText.alpha = 0.f;
     self.btLabel.alpha = 0.f;
     
-    _startPoint = CGPointMake(self.btMore.center.x - 10, self.btMore.center.y - 50);
-    self.btQR.center = _startPoint;
-    self.btLabel.center = _startPoint;
-    self.btText.center = _startPoint;
-    self.btFace.center = _startPoint;
+    self.startPoint = CGPointMake(self.btMore.center.x - 10, self.btMore.center.y - 120);
+    self.btQR.center = self.startPoint;
+    self.btLabel.center = self.startPoint;
+    self.btText.center = self.startPoint;
+    self.btFace.center = self.startPoint;
     [self.btMore setImageSize:25.0f];
 }
 
@@ -741,9 +705,7 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
                                  self.btLabel.transform = CGAffineTransformMakeScale(1.0,.6);
                                  self.btLabel.transform = CGAffineTransformConcat(CGAffineTransformMakeTranslation(0, +padding*2.5f), CGAffineTransformMakeScale(1.0, 1.0));
                                  
-                             } completion:^(BOOL finished) {
-                                 
-                             }];
+                             } completion:nil];
         } else {
             [UIView animateWithDuration:duration/2
                                   delay:0.0
@@ -761,9 +723,7 @@ typedef NS_ENUM( NSInteger, CVScanMode ) {
                                  self.btQR.alpha = 0;
                                  self.btQR.transform = CGAffineTransformMakeTranslation(0, 0);
                                  
-                             } completion:^(BOOL finished) {
-                                 
-                             }];
+                             } completion:nil];
         }
     }
 }
